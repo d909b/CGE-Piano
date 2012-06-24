@@ -57,6 +57,9 @@ void ApplicationManager::mainLoop()
 		sceneManager_.update(deltaTime);
 		renderManager_.renderObjects(sceneManager_.getObjects());
 
+		isRunning_ = !glfwGetKey( GLFW_KEY_ESC ) &&
+					  glfwGetWindowParam( GLFW_OPENED );
+
 		double loopTime = currentTime - glfwGetTime();
 		lastTime = currentTime;
 
