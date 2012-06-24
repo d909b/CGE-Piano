@@ -1,0 +1,2 @@
+Setup Assimp Model Loader: download assimp sdk. run command cmake .; make; sudo make install; in assimp directory. 
+	Add "assimp" to cmake target link libraries

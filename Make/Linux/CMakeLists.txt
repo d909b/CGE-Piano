@@ -17,4 +17,4 @@ SET_PROPERTY(TARGET glfw
 		     PROPERTY
              IMPORTED_LOCATION "Lib/Linux/libglfw.a")
 
-TARGET_LINK_LIBRARIES(PianoScene glfw ${OPENGL_LIBRARIES} openal)
+TARGET_LINK_LIBRARIES(PianoScene glfw ${OPENGL_LIBRARIES} assimp openal)

@@ -8,10 +8,19 @@
 #include "glm/glm.hpp"
 #include "GLFWWrapper.h"
 #include <AL/al.h>
+#include "assimp/assimp.h"
+#include "assimp/aiPostProcess.h"
+#include "assimp/aiScene.h"
 
 GLFWWrapper::GLFWWrapper()
 {
+	//test assimp model loader
+	aiGetMaterialColor(0, AI_MATKEY_COLOR_AMBIENT, 0);
+
+	//test gl Math
 	glm::vec2(-1.0f,-1.0f);
+
+	//test OpenAL
 	alGetError();
 }
 
