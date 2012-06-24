@@ -5,11 +5,14 @@
  * @author: Patrick Schwab
  */
 
+#include "glm/glm.hpp"
 #include "GLFWWrapper.h"
+#include <AL/al.h>
 
 GLFWWrapper::GLFWWrapper()
 {
-	;
+	glm::vec2(-1.0f,-1.0f);
+	alGetError();
 }
 
 GLFWWrapper::~GLFWWrapper()
@@ -31,3 +34,8 @@ void GLFWWrapper::openWindow(int width, int height, int redbits, int greenbits,
 {
 }
 
+int main(int argc, char** argv)
+{
+	glfwInit();
+	return 0;
+}
