@@ -26,10 +26,13 @@ void ApplicationManager::applicationStarted(int argc, char** argv)
 	glfwWrapper_.initialize();
 
 	glfwWrapper_.openWindowHint(GLFW_FSAA_SAMPLES, numMultiSamples_);
+	glfwWrapper_.setWindowTitle("Piano Scene");
 	glfwWrapper_.openWindow(1280, 720,  // width, height
 							8, 8, 8, 8,  // r, g, b, a
 							8, 8,	     // depth, stencil
-							GLFW_FULLSCREEN);
+							GLFW_WINDOW);
+
+	glfwEnable( GLFW_STICKY_KEYS );
 
 	mainLoop();
 }
@@ -57,14 +60,22 @@ void ApplicationManager::mainLoop()
 		sceneManager_.update(deltaTime);
 		renderManager_.renderObjects(sceneManager_.getObjects());
 
-		isRunning_ = !glfwGetKey( GLFW_KEY_ESC ) &&
-					  glfwGetWindowParam( GLFW_OPENED );
+		bool escPressed = glfwGetKey( GLFW_KEY_ESC );
+
+		if(escPressed == true)
+		{
+			terminateApplication();
+		}
+
+		glfwSwapBuffers();
 
 		double loopTime = currentTime - glfwGetTime();
 		lastTime = currentTime;
 
 		glfwSleep(timePerFrame - loopTime);
 	}
+
+	applicationEnded();
 }
 
 

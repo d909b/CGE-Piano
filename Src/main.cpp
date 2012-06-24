@@ -27,7 +27,5 @@ int main(int argc, char** argv)
 
 	appMgr->applicationStarted(argc, argv);
 
-	appMgr->applicationEnded();
-
 	return EXIT_SUCCESS;
 }
