@@ -27,7 +27,7 @@ void ApplicationManager::applicationStarted(int argc, char** argv)
 
 	glfwWrapper_.openWindowHint(GLFW_FSAA_SAMPLES, numMultiSamples_);
 	glfwWrapper_.setWindowTitle("Piano Scene");
-	glfwWrapper_.openWindow(1280, 720,  // width, height
+	glfwWrapper_.openWindow(1024, 600,  // width, height
 							8, 8, 8, 8,  // r, g, b, a
 							8, 8,	     // depth, stencil
 							GLFW_WINDOW);
