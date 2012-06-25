@@ -27,4 +27,12 @@ glm::mat3 Object::getRotation() const
 	return rotation_;
 }
 
+void Object::setAiScene(const aiScene* scene)
+{
+	scene_ = scene;
+}
 
+const aiScene* Object::getAiScene()
+{
+	return scene_;
+}

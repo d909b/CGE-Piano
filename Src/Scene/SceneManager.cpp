@@ -19,7 +19,15 @@ SceneManager::~SceneManager()
 
 void SceneManager::initialize()
 {
-	// Create any needed objects here.
+	//load the 3d piano model
+	modelManager_.loadModel(PIANOMODEL);
+	modelManager_.loadTextures();
+
+	//create piano Object
+
+	//set aiScene in piano object pianoObj.setAiScene(modelManager_.getAiScene());
+	//set meshes in piano object pianoObj.setMeshes(modelManager_.getMyMeshes());
+
 }
 
 void SceneManager::update(double deltaTime)
