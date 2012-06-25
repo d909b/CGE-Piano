@@ -27,8 +27,13 @@ public:
 	void initialize() const;
 	void terminate()  const;
 
+	void enable(int option);
+	void sleep(double time);
+	double getTime();
+
 	void setWindowTitle(std::string title);
 	void openWindowHint(int target, int hint);
+	void swapBuffers();
 
 	void openWindow(int width, int height,
 					int redbits, int greenbits, int bluebits,

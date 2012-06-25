@@ -32,7 +32,7 @@ void ApplicationManager::applicationStarted(int argc, char** argv)
 							8, 8,	     // depth, stencil
 							GLFW_WINDOW);
 
-	glfwEnable( GLFW_STICKY_KEYS );
+	glfwWrapper_.enable(GLFW_STICKY_KEYS);
 
 	mainLoop();
 }
@@ -49,12 +49,12 @@ void ApplicationManager::terminateApplication()
 
 void ApplicationManager::mainLoop()
 {
-	static double lastTime = glfwGetTime();
+	static double lastTime = glfwWrapper_.getTime();
 	static double timePerFrame = (double) 1. / framesPerSecond_;
 
 	while(isRunning_)
 	{
-		double currentTime = glfwGetTime();
+		double currentTime = glfwWrapper_.getTime();
 		double deltaTime = currentTime - lastTime;
 
 		sceneManager_.update(deltaTime);
@@ -67,12 +67,12 @@ void ApplicationManager::mainLoop()
 			terminateApplication();
 		}
 
-		glfwSwapBuffers();
+		glfwWrapper_.swapBuffers();
 
-		double loopTime = currentTime - glfwGetTime();
+		double loopTime = currentTime - glfwWrapper_.getTime();
 		lastTime = currentTime;
 
-		glfwSleep(timePerFrame - loopTime);
+		glfwWrapper_.sleep(timePerFrame - loopTime);
 	}
 
 	applicationEnded();

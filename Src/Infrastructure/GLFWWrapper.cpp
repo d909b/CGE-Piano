@@ -55,6 +55,26 @@ void GLFWWrapper::openWindowHint(int target, int hint)
 	glfwOpenWindowHint(target, hint);
 }
 
+void GLFWWrapper::enable(int option)
+{
+	glfwEnable(option);
+}
+
+void GLFWWrapper::sleep(double time)
+{
+	glfwSleep(time);
+}
+
+double GLFWWrapper::getTime()
+{
+	return glfwGetTime();
+}
+
+void GLFWWrapper::swapBuffers()
+{
+	glfwSwapBuffers();
+}
+
 void GLFWWrapper::openWindow(int width, int height, int redbits, int greenbits,
 						     int bluebits, int alphabits, int depthbits, int stencilbits,
 						     int mode) const
