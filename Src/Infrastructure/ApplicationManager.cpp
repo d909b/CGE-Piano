@@ -10,8 +10,7 @@
 ApplicationManager::ApplicationManager(int framesPerSecond, int numMultiSamples) :
 	framesPerSecond_(framesPerSecond),
 	numMultiSamples_(numMultiSamples),
-	isRunning_(true),
-	glfwWrapper_()
+	isRunning_(true)
 {
 	;
 }
