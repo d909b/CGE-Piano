@@ -8,6 +8,7 @@
 
 #include "glm/glm.hpp"
 #include "GLFWWrapper.h"
+#include "../Utility/OpenGL.h"
 
 
 GLFWWrapper::GLFWWrapper()

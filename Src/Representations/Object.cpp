@@ -7,7 +7,8 @@
 
 #include "Object.h"
 
-Object::Object()
+Object::Object(std::vector<Mesh>& meshes) :
+	meshes_(meshes)
 {
 	;
 }
@@ -27,12 +28,7 @@ glm::mat3 Object::getRotation() const
 	return rotation_;
 }
 
-void Object::setAiScene(const aiScene* scene)
+std::vector<Mesh> Object::getMeshes() const
 {
-	scene_ = scene;
-}
-
-const aiScene* Object::getAiScene()
-{
-	return scene_;
+	return meshes_;
 }

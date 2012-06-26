@@ -17,6 +17,7 @@ public:
 	RenderManager();
 	virtual ~RenderManager();
 
+	void initialize(int width, int height);
 	void renderObjects(const std::list<boost::shared_ptr<Object> > objects);
 };
 

@@ -10,8 +10,7 @@
 ApplicationManager::ApplicationManager(int framesPerSecond, int numMultiSamples) :
 	framesPerSecond_(framesPerSecond),
 	numMultiSamples_(numMultiSamples),
-	isRunning_(true),
-	glfwWrapper_()
+	isRunning_(true)
 {
 	;
 }
@@ -23,19 +22,25 @@ ApplicationManager::~ApplicationManager()
 
 void ApplicationManager::applicationStarted(int argc, char** argv)
 {
+	int width = 1024, height = 600;
+
 	glfwWrapper_.initialize();
 
 	glfwWrapper_.openWindowHint(GLFW_FSAA_SAMPLES, numMultiSamples_);
 	glfwWrapper_.setWindowTitle("Piano Scene");
-	glfwWrapper_.openWindow(1024, 600,  // width, height
+	glfwWrapper_.openWindow(width, height,  // width, height
 							8, 8, 8, 8,  // r, g, b, a
 							8, 8,	     // depth, stencil
 							GLFW_WINDOW);
 
 	glfwWrapper_.enable(GLFW_STICKY_KEYS);
 
+<<<<<<< HEAD
 	//load all Objects in the application
 	sceneManager_.initialize();
+=======
+	renderManager_.initialize(width, height);
+>>>>>>> 0fec25b1e5035af94b733172120f9b0877ce7a6a
 
 	mainLoop();
 }

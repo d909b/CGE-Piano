@@ -23,9 +23,13 @@ public:
 	void initialize();
 	void update(double deltaTime);
 
-	const std::list<boost::shared_ptr<Object> > getObjects() const;
+	std::list<boost::shared_ptr<Object> > getObjects() const;
 private:
 	std::list<boost::shared_ptr<Object> > objects_;
 	ModelManager modelManager_;
+
+	boost::shared_ptr<Object> piano_;
+	boost::shared_ptr<Object> metronom_;
+	boost::shared_ptr<Object> room_;
 };
 

@@ -10,11 +10,12 @@
 #include <glm/glm.hpp>
 #include "assimp/aiScene.h"
 #include "../ModelLoader/MyMesh.h"
+#include "Mesh.h"
 
 class Object
 {
 public:
-	Object();
+	Object(std::vector<Mesh>& meshes);
 	virtual ~Object();
 
 	glm::vec3 getTranslation() const;
@@ -35,5 +36,12 @@ private:
 	std::vector<MyMesh> myMeshes_;
 	glm::vec3 translation_;
 	glm::mat3 rotation_;
+
+	std::vector<Mesh> getMeshes() const;
+private:
+	glm::vec3 translation_;
+	glm::mat3 rotation_;
+
+	std::vector<Mesh> meshes_;
 };
 

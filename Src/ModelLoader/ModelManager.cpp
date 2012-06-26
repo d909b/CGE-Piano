@@ -73,24 +73,21 @@ aiVector3D ModelManager::getSceneCenter()
 	return scene_center_;
 }
 
-const aiScene* ModelManager::getAiScene()
-{
-	return scene_;
-}
-
-bool ModelManager::loadModel(std::string file)
+boost::shared_ptr<Object> ModelManager::loadModel(std::string file)
 {	
 	//import the model
-	scene_ = importer_.ReadFile(file, aiProcessPreset_TargetRealtime_MaxQuality);
+	const aiScene* scene = scene_ = importer_.ReadFile(file, aiProcessPreset_TargetRealtime_MaxQuality);
 
-	if(!scene_)
+	if(!scene)
 	{
-		std::cout << "Reading File failed";
-		return false;
+		std::string text = "Reading File failed\n";
+		std::cout << text;
+		throw ModelManagerException(text);
 	}
 	else
 	{
 		std::cout << "Import of model succeeded\n";
+		std::cout << "Import of model succeeded" << std::endl;
 	}
 	
 	getBoundingBox(&scene_min_, &scene_max_);
@@ -123,4 +120,36 @@ bool ModelManager::loadTextures()
 std::vector<MyMesh> ModelManager::getMyMeshes()
 {
 	return meshLoader_.getMyMeshes();
+
+	/** Obtain meshes. */
+	std::vector<Mesh> meshes = getMeshesFromAiScene(scene);
+
+	return boost::shared_ptr<Object>(new Object(meshes));
+}
+
+std::vector<Mesh> ModelManager::getMeshesFromAiScene(const aiScene* scene)
+{
+    std::vector<Mesh> meshes;
+
+    for(unsigned int i = 0; i != scene->mNumMeshes; ++i)
+    {
+        aiMesh* aimesh = scene->mMeshes[i];
+
+        Mesh mesh = createMeshFromAiMesh(scene, aimesh);
+
+        meshes.push_back(mesh);
+    }
+
+    return meshes;
+}
+
+Mesh ModelManager::createMeshFromAiMesh(const aiScene* scene, aiMesh* mesh)
+{
+	Texture texture;
+	std::vector<Vertex> vertices;
+	std::vector<Index> indices;
+
+	/** Fill mesh data (vertices, indices and texture) here */
+
+	return Mesh(vertices, indices, texture);
 }

@@ -5,11 +5,11 @@
  *      Author: steindl
  */
 
-#ifndef TEXTURELOADER_H_
-#define TEXTURELOADER_H_
+#pragma once
 
 #include <glfw.h>
 #include <map>
+#include "glfw.h"
 #include "assimp/aiScene.h"
 
 class TextureLoader
@@ -26,4 +26,3 @@ private:
 	const aiScene* scene_;
 	std::map<std::string, GLuint> textureIdMap;
 };
-#endif /* TEXTURELOADER_H_ */
