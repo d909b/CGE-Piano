@@ -5,22 +5,6 @@
  * @author: Patrick Schwab
  */
 
-#if __CDT_PARSER__
-	#include <gl.h>
-	#include <glu.h>
-	#include <al.h>
-#else
-	#if __APPLE__
-		#include <OpenGL/gl.h>
-		#include <OpenGL/glu.h>
-		#include <OpenAL/al.h>
-	#else
-		#include <GL/glut.h>
-		#include <GL/gl.h>
-		#include <GL/glu.h>
-		#include <AL/al.h>
-	#endif
-#endif
 
 #include "glm/glm.hpp"
 #include "GLFWWrapper.h"
@@ -33,6 +17,13 @@ GLFWWrapper::GLFWWrapper()
 
 void GLFWWrapper::initialize() const
 {
+	/*
+	GLenum err = glewInit();
+	if(GLEW_OK != err)
+	{
+		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+	}
+*/
 	if(glfwInit() != GL_TRUE)
 	{
 		throw GLFWException("Failed to initialize GLFW.");

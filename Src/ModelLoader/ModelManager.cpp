@@ -90,7 +90,7 @@ bool ModelManager::loadModel(std::string file)
 	}
 	else
 	{
-		std::cout << "Import of model succeeded";
+		std::cout << "Import of model succeeded\n";
 	}
 	
 	getBoundingBox(&scene_min_, &scene_max_);
@@ -101,15 +101,26 @@ bool ModelManager::loadModel(std::string file)
 
 	setScaleFactor(scene_min_, scene_max_);
 
+	//if(loadTextures())
+		//std::cout << "Succesfully loaded Textures\n";
+
+	//if(loadMeshes())
+		//std::cout << "Succesfully generated Meshes\n";
+
 	return true;
+}
+
+bool ModelManager::loadMeshes()
+{
+	return meshLoader_.loadVertexArrayObjects(scene_, textureLoader_);
 }
 
 bool ModelManager::loadTextures()
 {
-	return textureLoader.loadTextures(scene_);
+	return textureLoader_.loadTextures(scene_);
 }
 
-std::vector<struct MyMesh> ModelManager::getMyMeshes()
+std::vector<MyMesh> ModelManager::getMyMeshes()
 {
-	return myMeshes_;
+	return meshLoader_.getMyMeshes();
 }

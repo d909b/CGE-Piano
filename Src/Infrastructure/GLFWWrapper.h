@@ -9,8 +9,27 @@
 
 #include <string>
 #include <exception>
+#include <glew.h>
 #include <glfw.h>
 #include "../Utility/MessagedException.h"
+
+#if __CDT_PARSER__
+	#include <gl.h>
+	#include <glu.h>
+	#include <al.h>
+#else
+	#if __APPLE__
+		#include <OpenGL/gl.h>
+		#include <OpenGL/glu.h>
+		#include <OpenAL/al.h>
+	#else
+		#include <GL/glut.h>
+		#include <GL/glu.h>
+		#include <GL/gl.h>
+		#include <AL/al.h>
+	#endif
+#endif
+
 
 /**
  * @class GLFWWrapper

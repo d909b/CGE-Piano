@@ -25,9 +25,6 @@ void ApplicationManager::applicationStarted(int argc, char** argv)
 {
 	glfwWrapper_.initialize();
 
-	//load all Objects in the application
-	sceneManager_.initialize();
-
 	glfwWrapper_.openWindowHint(GLFW_FSAA_SAMPLES, numMultiSamples_);
 	glfwWrapper_.setWindowTitle("Piano Scene");
 	glfwWrapper_.openWindow(1024, 600,  // width, height
@@ -37,6 +34,8 @@ void ApplicationManager::applicationStarted(int argc, char** argv)
 
 	glfwWrapper_.enable(GLFW_STICKY_KEYS);
 
+	//load all Objects in the application
+	sceneManager_.initialize();
 
 	mainLoop();
 }

@@ -9,9 +9,8 @@
 #define TEXTURELOADER_H_
 
 #include <glfw.h>
+#include <map>
 #include "assimp/aiScene.h"
-
-#endif /* TEXTURELOADER_H_ */
 
 class TextureLoader
 {
@@ -20,7 +19,11 @@ public:
 	~TextureLoader();
 	bool loadTextures(const aiScene* scene);
 	void setAiScene(const aiScene* scene);
+	std::map<std::string, GLuint> getTextureIdMap() const {
+		return textureIdMap;
+	}
 private:
 	const aiScene* scene_;
 	std::map<std::string, GLuint> textureIdMap;
 };
+#endif /* TEXTURELOADER_H_ */
