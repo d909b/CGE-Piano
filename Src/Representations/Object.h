@@ -31,17 +31,12 @@ public:
 		myMeshes_ = myMeshes;
 	}
 
+	std::vector<Mesh> getMeshes() const;
 private:
 	const aiScene* scene_;
 	std::vector<MyMesh> myMeshes_;
 	glm::vec3 translation_;
 	glm::mat3 rotation_;
-
-	std::vector<Mesh> getMeshes() const;
-private:
-	glm::vec3 translation_;
-	glm::mat3 rotation_;
-
 	std::vector<Mesh> meshes_;
 };
 

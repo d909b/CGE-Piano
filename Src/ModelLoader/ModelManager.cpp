@@ -73,7 +73,7 @@ aiVector3D ModelManager::getSceneCenter()
 	return scene_center_;
 }
 
-boost::shared_ptr<Object> ModelManager::loadModel(std::string file)
+bool ModelManager::loadModel(std::string file)
 {	
 	//import the model
 	const aiScene* scene = scene_ = importer_.ReadFile(file, aiProcessPreset_TargetRealtime_MaxQuality);
@@ -87,7 +87,6 @@ boost::shared_ptr<Object> ModelManager::loadModel(std::string file)
 	else
 	{
 		std::cout << "Import of model succeeded\n";
-		std::cout << "Import of model succeeded" << std::endl;
 	}
 	
 	getBoundingBox(&scene_min_, &scene_max_);
@@ -120,9 +119,12 @@ bool ModelManager::loadTextures()
 std::vector<MyMesh> ModelManager::getMyMeshes()
 {
 	return meshLoader_.getMyMeshes();
+}
 
+boost::shared_ptr<Object> ModelManager::getMeshes()
+{
 	/** Obtain meshes. */
-	std::vector<Mesh> meshes = getMeshesFromAiScene(scene);
+	std::vector<Mesh> meshes = getMeshesFromAiScene(scene_);
 
 	return boost::shared_ptr<Object>(new Object(meshes));
 }

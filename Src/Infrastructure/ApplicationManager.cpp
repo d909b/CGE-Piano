@@ -35,12 +35,10 @@ void ApplicationManager::applicationStarted(int argc, char** argv)
 
 	glfwWrapper_.enable(GLFW_STICKY_KEYS);
 
-<<<<<<< HEAD
 	//load all Objects in the application
 	sceneManager_.initialize();
-=======
+
 	renderManager_.initialize(width, height);
->>>>>>> 0fec25b1e5035af94b733172120f9b0877ce7a6a
 
 	mainLoop();
 }
