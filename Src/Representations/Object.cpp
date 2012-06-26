@@ -27,4 +27,11 @@ glm::mat3 Object::getRotation() const
 	return rotation_;
 }
 
+std::vector<Mesh> Object::getMeshes() const
+{
+	return meshes_;
+}
+
+
+
 

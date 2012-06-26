@@ -19,7 +19,7 @@ ModelManager::~ModelManager()
 
 void ModelManager::loadModel(std::string file)
 {
-	scene = importer.ReadFile(file, aiProcess_OptimizeMeshes);
+	/*scene = importer.ReadFile(file, aiProcess_OptimizeMeshes);
 
 	if(!scene)
 	{
@@ -28,5 +28,5 @@ void ModelManager::loadModel(std::string file)
 	else
 	{
 		std::cout << "Import of model succeeded";
-	}
+	}*/
 }

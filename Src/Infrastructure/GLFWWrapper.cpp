@@ -5,25 +5,9 @@
  * @author: Patrick Schwab
  */
 
-#if __CDT_PARSER__
-	#include <gl.h>
-	#include <glu.h>
-	#include <al.h>
-#else
-	#if __APPLE__
-		#include <OpenGL/gl.h>
-		#include <OpenGL/glu.h>
-		#include <OpenAL/al.h>
-	#else
-		#include <GL/glut.h>
-		#include <GL/gl.h>
-		#include <GL/glu.h>
-		#include <AL/al.h>
-	#endif
-#endif
-
 #include "glm/glm.hpp"
 #include "GLFWWrapper.h"
+#include "../Utility/OpenGL.h"
 
 
 GLFWWrapper::GLFWWrapper()

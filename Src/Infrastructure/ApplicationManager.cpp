@@ -22,16 +22,20 @@ ApplicationManager::~ApplicationManager()
 
 void ApplicationManager::applicationStarted(int argc, char** argv)
 {
+	int width = 1024, height = 600;
+
 	glfwWrapper_.initialize();
 
 	glfwWrapper_.openWindowHint(GLFW_FSAA_SAMPLES, numMultiSamples_);
 	glfwWrapper_.setWindowTitle("Piano Scene");
-	glfwWrapper_.openWindow(1024, 600,  // width, height
+	glfwWrapper_.openWindow(width, height,  // width, height
 							8, 8, 8, 8,  // r, g, b, a
 							8, 8,	     // depth, stencil
 							GLFW_WINDOW);
 
 	glfwWrapper_.enable(GLFW_STICKY_KEYS);
+
+	renderManager_.initialize(width, height);
 
 	mainLoop();
 }

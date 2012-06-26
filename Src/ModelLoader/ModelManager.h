@@ -5,13 +5,12 @@
  *      Author: steindl
  */
 
-#ifndef MODELMANAGER_H_
-#define MODELMANAGER_H_
+#pragma once
+
 #include <iostream>
 #include "assimp/assimp.hpp"
 #include "assimp/aiScene.h"
 #include "assimp/aiPostProcess.h"
-#endif /* MODELMANAGER_H_ */
 
 class ModelManager
 {
@@ -20,6 +19,6 @@ public:
 	virtual ~ModelManager();
 	void loadModel(std::string file);
 private:
-	const aiScene* scene;
-	Assimp::Importer importer;
+	/*const aiScene* scene;
+	Assimp::Importer importer;*/
 };
