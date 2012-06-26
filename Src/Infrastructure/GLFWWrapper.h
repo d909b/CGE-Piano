@@ -9,7 +9,6 @@
 
 #include <string>
 #include <exception>
-#include <glew.h>
 #include <glfw.h>
 #include "../Utility/MessagedException.h"
 

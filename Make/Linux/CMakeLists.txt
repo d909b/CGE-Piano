@@ -17,10 +17,10 @@ SET_PROPERTY(TARGET glfw
 		     PROPERTY
              IMPORTED_LOCATION "Lib/Linux/libglfw.a")
 
-ADD_LIBRARY(glew STATIC IMPORTED)
+ADD_LIBRARY(devIL STATIC IMPORTED)
              
-SET_PROPERTY(TARGET glew 
+SET_PROPERTY(TARGET devIL 
 		     PROPERTY
-             IMPORTED_LOCATION "Lib/Linux/libGLEW.a")
+             IMPORTED_LOCATION "Lib/Linux/libIL.a")
              
-TARGET_LINK_LIBRARIES(PianoScene glew glfw ${OPENGL_LIBRARIES} assimp openal)
+TARGET_LINK_LIBRARIES(PianoScene devIL glfw ${OPENGL_LIBRARIES} assimp openal)

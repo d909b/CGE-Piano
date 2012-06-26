@@ -9,7 +9,8 @@
 
 TextureLoader::TextureLoader()
 {
-	;
+	/* initialization of DevIL */
+	ilInit();
 }
 
 TextureLoader::~TextureLoader()
@@ -17,49 +18,70 @@ TextureLoader::~TextureLoader()
 	;
 }
 
-void TextureLoader::setAiScene(const aiScene* scene)
+Texture TextureLoader::loadTexture(const aiScene* scene, unsigned int index)
 {
-	scene_ = scene;
-}
+	ILboolean success;
 
-//unchecked
-bool TextureLoader::loadTextures(const aiScene* scene)
-{
-	setAiScene(scene);
+	Texture texture;
 
-	/* scan scene's materials for textures */
-	for (unsigned int m=0; m<scene_->mNumMaterials; ++m)
+	std::string filename;
+	int texIndex = 0;
+	aiString path;	// filename
+
+	aiReturn texFound = scene->mMaterials[index]->GetTexture(aiTextureType_DIFFUSE, texIndex, &path);
+	if(texFound == AI_SUCCESS)
 	{
-		int texIndex = 0;
-		aiString path;	// filename
+		filename = path.data;
+		//TODO: don't know if this works, adapted it from MeshFactory.cpp
+		filename = filename.substr(filename.find_last_of("/\\") +1);
 
-		aiReturn texFound = scene_->mMaterials[m]->GetTexture(aiTextureType_DIFFUSE, texIndex, &path);
-		while (texFound == AI_SUCCESS) {
-			//fill map with textures, OpenGL image ids set to 0
-			textureIdMap[path.data] = 0;
-			// more textures?
-			texIndex++;
-			texFound = scene_->mMaterials[m]->GetTexture(aiTextureType_DIFFUSE, texIndex, &path);
-		}
+		//save filename for texture
+		texture.setFilename(filename);
 	}
 
-	int numTextures = textureIdMap.size();
+	int numTextures = 1;
 
-	/* create and fill array with GL texture ids */
-	GLuint* textureIds = new GLuint[numTextures];
-	glGenTextures(numTextures, textureIds); /* Texture name generation */
+	/* create and fill DevIL texture id */
+	ILuint* imageId = 0;
+	ilGenImages(numTextures, imageId);
 
-	/* get iterator */
-	std::map<std::string, GLuint>::iterator itr = textureIdMap.begin();
-	int i=0;
-	for (; itr != textureIdMap.end(); ++i, ++itr)
-	{
-		//save IL image ID
-		std::string filename = (*itr).first;  // get filename
-		(*itr).second = textureIds[i];	  // save texture id for filename in map
+	/* create and fill GL texture id */
+	GLuint* textureId = 0;
+	glGenTextures(numTextures, textureId); /* Texture name generation */
+
+	//save generated textureId for texture
+	texture.setTextureId(textureId);
+
+	//TODO: don't know if this part is needed here
+	//Binding of DevIL image name
+	ilBindImage((unsigned int)imageId);
+	ilEnable(IL_ORIGIN_SET);
+	ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
+	success = ilLoadImage((ILstring)textureId);
+
+	if (success) {
+		// Convert image to RGBA
+		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+
+		// Create and load textures to OpenGL
+		glBindTexture(GL_TEXTURE_2D, (unsigned int)textureId);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, ilGetInteger(IL_IMAGE_WIDTH),
+				ilGetInteger(IL_IMAGE_HEIGHT), 0, GL_RGBA, GL_UNSIGNED_BYTE,
+				ilGetData());
 	}
+	else
+		printf("Couldn't load Image: %i\n", (int)textureId);
 
-	//return success;
-	return true;
+	// Because we have already copied image data into texture data
+	//	we can release memory used by image.
+	ilDeleteImages(numTextures, imageId);
+
+	//Cleanup
+	delete imageId;
+	delete textureId;
+
+	//return the texture Object;
+	return texture;
 }
-

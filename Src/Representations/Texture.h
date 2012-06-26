@@ -7,14 +7,35 @@
 
 #pragma once
 
+#include <string.h>
+#include <iostream>
+#include <glfw.h>
+
 class Texture
 {
 public:
 	Texture();
 	virtual ~Texture();
 
-	int getHandle() const;
+	void setFilename(std::string filename) {
+		filename_ = filename;
+	}
+
+	void setTextureId(GLuint* textureId) {
+		textureId_ = textureId;
+	}
+
+	std::string getFilename() const {
+		return filename_;
+	}
+
+	GLuint* getTextureId() const {
+		return textureId_;
+	}
+
+
 private:
-	int textureHandle_;
+	std::string filename_;
+	GLuint* textureId_;
 };
 

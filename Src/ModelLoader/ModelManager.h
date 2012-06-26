@@ -16,7 +16,6 @@
 #include "../Utility/MessagedException.h"
 #include "../Representations/Object.h"
 #include "TextureLoader.h"
-#include "MeshLoader.h"
 
 #define aisgl_min(x,y) (x<y?x:y)
 #define aisgl_max(x,y) (y>x?y:x)
@@ -26,21 +25,19 @@ class ModelManager
 public:
 	ModelManager();
 	virtual ~ModelManager();
-	bool loadModel(std::string file);
-	bool loadMeshes();
-	bool loadTextures();
+	boost::shared_ptr<Object> loadModel(std::string file);
+	boost::shared_ptr<Object> loadMeshes();
+
+	const aiScene* getAiScene();
+	aiVector3D getSceneCenter();
+	Texture loadTexture(int index);
+
 	void getBoundingBox (struct aiVector3D* min, struct aiVector3D* max);
 	void getBoundingBoxForNode (const struct aiNode* nd, struct aiVector3D* min, struct aiVector3D* max);
 	void setScaleFactor(struct aiVector3D scene_min, struct aiVector3D scene_max);
 	float getScaleFactor();
-	aiVector3D getSceneCenter();
-	const aiScene* getAiScene();
-	std::vector<MyMesh> getMyMeshes();
-	Mesh createMeshFromAiMesh(const aiScene* scene, aiMesh* mesh);
-	std::vector<Mesh> getMeshesFromAiScene(const aiScene* scene);
-	boost::shared_ptr<Object> getMeshes();
+
 private:
-	MeshLoader meshLoader_;
 	TextureLoader textureLoader_;
 	const aiScene* scene_;
 	Assimp::Importer importer_;
@@ -48,6 +45,9 @@ private:
 	struct aiVector3D scene_max_;
 	struct aiVector3D scene_center_;
 	float scaleFactor_;
+
+	Mesh createMeshFromAiMesh(const aiScene* scene, aiMesh* mesh);
+	std::vector<Mesh> getMeshesFromAiScene(const aiScene* scene);
 };
 
 class ModelManagerException : public MessagedException

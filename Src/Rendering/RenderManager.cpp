@@ -85,7 +85,7 @@ void RenderManager::renderObjects(const std::list<boost::shared_ptr<Object> > ob
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 			glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), &first.textureCoordinates[0]);
 
-			glBindTexture(GL_TEXTURE_2D, texture.getHandle());
+			glBindTexture(GL_TEXTURE_2D, (unsigned int)texture.getTextureId());
 			glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, &indices[0]);
 		}
 

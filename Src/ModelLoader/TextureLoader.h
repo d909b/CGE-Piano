@@ -7,22 +7,16 @@
 
 #pragma once
 
+// include DevIL for image loading
+#include <il.h>
 #include <glfw.h>
-#include <map>
-#include "glfw.h"
 #include "assimp/aiScene.h"
+#include "../Representations/Texture.h"
 
 class TextureLoader
 {
 public:
 	TextureLoader();
 	~TextureLoader();
-	bool loadTextures(const aiScene* scene);
-	void setAiScene(const aiScene* scene);
-	std::map<std::string, GLuint> getTextureIdMap() const {
-		return textureIdMap;
-	}
-private:
-	const aiScene* scene_;
-	std::map<std::string, GLuint> textureIdMap;
+	Texture loadTexture(const aiScene* scene, unsigned int index);
 };

@@ -73,7 +73,7 @@ aiVector3D ModelManager::getSceneCenter()
 	return scene_center_;
 }
 
-bool ModelManager::loadModel(std::string file)
+boost::shared_ptr<Object> ModelManager::loadModel(std::string file)
 {	
 	//import the model
 	const aiScene* scene = scene_ = importer_.ReadFile(file, aiProcessPreset_TargetRealtime_MaxQuality);
@@ -88,43 +88,21 @@ bool ModelManager::loadModel(std::string file)
 	{
 		std::cout << "Import of model succeeded\n";
 	}
-	
-	getBoundingBox(&scene_min_, &scene_max_);
 
-	scene_center_.x = (scene_min_.x + scene_max_.x) / 2.0f;
-	scene_center_.y = (scene_min_.y + scene_max_.y) / 2.0f;
-	scene_center_.z = (scene_min_.z + scene_max_.z) / 2.0f;
-
-	setScaleFactor(scene_min_, scene_max_);
-
-	//if(loadTextures())
-		//std::cout << "Succesfully loaded Textures\n";
-
-	//if(loadMeshes())
-		//std::cout << "Succesfully generated Meshes\n";
-
-	return true;
+	return loadMeshes();
 }
 
-bool ModelManager::loadMeshes()
+Texture ModelManager::loadTexture(int index)
 {
-	return meshLoader_.loadVertexArrayObjects(scene_, textureLoader_);
+	return textureLoader_.loadTexture(scene_,index);
 }
 
-bool ModelManager::loadTextures()
-{
-	return textureLoader_.loadTextures(scene_);
-}
-
-std::vector<MyMesh> ModelManager::getMyMeshes()
-{
-	return meshLoader_.getMyMeshes();
-}
-
-boost::shared_ptr<Object> ModelManager::getMeshes()
+boost::shared_ptr<Object> ModelManager::loadMeshes()
 {
 	/** Obtain meshes. */
 	std::vector<Mesh> meshes = getMeshesFromAiScene(scene_);
+
+	std::cout << "Loaded all Meshes for Imported Object\n";
 
 	return boost::shared_ptr<Object>(new Object(meshes));
 }
@@ -152,6 +130,55 @@ Mesh ModelManager::createMeshFromAiMesh(const aiScene* scene, aiMesh* mesh)
 	std::vector<Index> indices;
 
 	/** Fill mesh data (vertices, indices and texture) here */
+
+	/* get textures for Mesh */
+	bool hasTexture = false;
+	if(mesh->mTextureCoords[0] != NULL)
+	{
+		hasTexture = true;
+
+		texture = loadTexture(mesh->mMaterialIndex);
+		std::cout << "Loaded all Textures for Imported Object\n";
+	}
+
+	/* get indices for Mesh */
+	unsigned int size = 0;
+	unsigned int numFaces = mesh->mNumFaces;
+	for(unsigned int i = 0;i<numFaces;i++)
+	{
+		size += mesh->mFaces[i].mNumIndices;
+	}
+
+	indices = std::vector<Index>(size);
+
+	unsigned int index = 0;
+	for(unsigned int i=0;i<numFaces;i++)
+	{
+		for(unsigned int x=0;x < mesh->mFaces[i].mNumIndices;x++)
+		{
+			indices[index++] = mesh->mFaces[i].mIndices[x];
+		}
+	}
+
+	/* get vertices for Mesh */
+	vertices = std::vector<Vertex>(mesh->mNumVertices);
+
+	for(unsigned int i=0;i < mesh->mNumVertices;i++)
+	{
+		vertices[i].positions[0] = mesh->mVertices[i].x;
+		vertices[i].positions[1] = mesh->mVertices[i].y;
+		vertices[i].positions[2] = mesh->mVertices[i].z;
+
+		if(hasTexture)
+		{
+			vertices[i].textureCoordinates[0] = mesh->mTextureCoords[0][i].x;
+			vertices[i].textureCoordinates[1] = 1 - mesh->mTextureCoords[0][i].y;
+		}
+
+		vertices[i].normals[0] = mesh->mNormals[i].x;
+		vertices[i].normals[1] = mesh->mNormals[i].y;
+		vertices[i].normals[2] = mesh->mNormals[i].z;
+	}
 
 	return Mesh(vertices, indices, texture);
 }

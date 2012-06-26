@@ -8,6 +8,7 @@
 #include "TextureLoader.h"
 #include "MyMesh.h"
 #include "MyMaterial.h"
+#include <map>
 
 class MeshLoader
 {
