@@ -10,6 +10,9 @@
 #include <list>
 #include <boost/shared_ptr.hpp>
 #include "../Representations/Object.h"
+#include "../ModelLoader/ModelManager.h"
+
+#define PIANOMODEL "./3dModels/piano.3ds"
 
 class SceneManager
 {
@@ -20,8 +23,13 @@ public:
 	void initialize();
 	void update(double deltaTime);
 
-	const std::list<boost::shared_ptr<Object> > getObjects() const;
+	std::list<boost::shared_ptr<Object> > getObjects() const;
 private:
 	std::list<boost::shared_ptr<Object> > objects_;
+	ModelManager modelManager_;
+
+	boost::shared_ptr<Object> piano_;
+	boost::shared_ptr<Object> metronom_;
+	boost::shared_ptr<Object> room_;
 };
 

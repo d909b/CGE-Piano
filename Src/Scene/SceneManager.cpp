@@ -19,15 +19,36 @@ SceneManager::~SceneManager()
 
 void SceneManager::initialize()
 {
-	// Create any needed objects here.
+	//load the 3d piano model
+	try
+	{
+		piano_ = modelManager_.loadModel(PIANOMODEL);
+		/**
+		 * metronom_ = modelManager.loadModel(METRONOMMODEL);
+		 * room_ = modelManager.loadModel(ROOMMODEL);
+		 */
+	}
+	catch(const ModelManagerException& e)
+	{
+		std::cerr << "Could not initialize models, because " << e.what() << std::endl;
+	}
+
+	/**
+	 * objects_.push_back(piano_);
+	 */
 }
 
 void SceneManager::update(double deltaTime)
 {
 	// Update object states here.
+
+	/**
+	 * e.g.:
+	 * metronom_.rotate(35.f, 0, 1, 0);
+	 */
 }
 
-const std::list<boost::shared_ptr<Object> > SceneManager::getObjects() const
+std::list<boost::shared_ptr<Object> > SceneManager::getObjects() const
 {
 	return objects_;
 }

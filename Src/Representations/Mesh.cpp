@@ -7,14 +7,19 @@
 
 #include "Mesh.h"
 
-Mesh::Mesh()
+Mesh::Mesh(std::vector<Vertex>& vertices,
+		std::vector<Index>& indices,
+		Texture& texture) :
+	vertices_(vertices),
+	indices_(indices),
+	texture_(texture)
 {
-	// TODO Auto-generated constructor stub
+	;
 }
 
 Mesh::~Mesh()
 {
-	// TODO Auto-generated destructor stub
+	;
 }
 
 Texture Mesh::getTexture() const

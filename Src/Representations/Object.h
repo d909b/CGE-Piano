@@ -13,7 +13,7 @@
 class Object
 {
 public:
-	Object();
+	Object(std::vector<Mesh>& meshes);
 	virtual ~Object();
 
 	glm::vec3 getTranslation() const;

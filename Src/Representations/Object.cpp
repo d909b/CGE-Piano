@@ -7,7 +7,8 @@
 
 #include "Object.h"
 
-Object::Object()
+Object::Object(std::vector<Mesh>& meshes) :
+	meshes_(meshes)
 {
 	;
 }
@@ -31,7 +32,3 @@ std::vector<Mesh> Object::getMeshes() const
 {
 	return meshes_;
 }
-
-
-
-
