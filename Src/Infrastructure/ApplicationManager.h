@@ -10,6 +10,9 @@
 #include "GLFWWrapper.h"
 #include "../Scene/SceneManager.h"
 #include "../Rendering/RenderManager.h"
+#include "../Sound/SoundManager.h"
+#include "../Utility/OpenAL.h"
+#include <AL/alut.h>
 
 class ApplicationManager
 {
@@ -31,5 +34,6 @@ private:
 	GLFWWrapper glfwWrapper_;
 	SceneManager sceneManager_;
 	RenderManager renderManager_;
+	SoundManager soundManager_;
 };
 

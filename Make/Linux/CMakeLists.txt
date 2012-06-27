@@ -23,4 +23,4 @@ SET_PROPERTY(TARGET devIL
 		     PROPERTY
              IMPORTED_LOCATION "Lib/Linux/libIL.a")
              
-TARGET_LINK_LIBRARIES(PianoScene devIL glfw ${OPENGL_LIBRARIES} assimp openal)
+TARGET_LINK_LIBRARIES(PianoScene devIL glfw ${OPENGL_LIBRARIES} assimp openal alut)

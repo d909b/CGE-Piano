@@ -5,8 +5,6 @@
  * @author: patrick
  */
 
-#pragma once
-
 #if __CDT_PARSER__
 	#include <gl.h>
 	#include <glu.h>

@@ -7,6 +7,8 @@
 
 #include "ApplicationManager.h"
 
+#define PIANOSOUND "/home/test.wav"
+
 ApplicationManager::ApplicationManager(int framesPerSecond, int numMultiSamples) :
 	framesPerSecond_(framesPerSecond),
 	numMultiSamples_(numMultiSamples),
@@ -34,6 +36,16 @@ void ApplicationManager::applicationStarted(int argc, char** argv)
 							GLFW_WINDOW);
 
 	glfwWrapper_.enable(GLFW_STICKY_KEYS);
+
+	//test the sound manager
+	std::string files[] = {"/home/steindl/git/CGE-Piano/Src/Sound/MetronomeSounds/0.wav",
+			"/home/steindl/git/CGE-Piano/Src/Sound/PianoSounds/1.wav",
+			"/home/steindl/git/CGE-Piano/Src/Sound/PianoSounds/2.wav"
+			};
+
+	soundManager_.loadSoundBuffers(files);
+	soundManager_.playSound(1);
+	soundManager_.playSound(2);
 
 	//load all Objects in the application
 	sceneManager_.initialize();

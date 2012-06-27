@@ -8,8 +8,6 @@
 
 #include "glm/glm.hpp"
 #include "GLFWWrapper.h"
-#include "../Utility/OpenGL.h"
-
 
 GLFWWrapper::GLFWWrapper()
 {
@@ -18,17 +16,17 @@ GLFWWrapper::GLFWWrapper()
 
 void GLFWWrapper::initialize() const
 {
-	/*
-	GLenum err = glewInit();
-	if(GLEW_OK != err)
-	{
-		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
-	}
-*/
 	if(glfwInit() != GL_TRUE)
 	{
 		throw GLFWException("Failed to initialize GLFW.");
 	}
+
+	alutInit(0,NULL);
+	if(alutGetError() != ALUT_ERROR_NO_ERROR)
+	{
+		throw GLFWException("Error at init of alut\n");
+	}
+
 }
 
 void GLFWWrapper::terminate() const
