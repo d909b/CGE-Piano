@@ -13,8 +13,7 @@
 #include "../ModelLoader/ModelManager.h"
 
 #define DUCKMODEL "./3dModels/duck.dae"
-#define PIANOMODEL "./3dModels/piano.3ds"
-#define TESTMODEL "./3dModels/test.obj"
+#define PIANOMODEL "./3dModels/blackPiano.3DS"
 
 class SceneManager
 {

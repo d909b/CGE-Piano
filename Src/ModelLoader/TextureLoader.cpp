@@ -29,12 +29,12 @@ Texture TextureLoader::loadTexture(const aiScene* scene, unsigned int index)
 	int texIndex = 0;
 	aiString path;	// filename
 
-	aiReturn texFound = scene->mMaterials[index]->GetTexture(aiTextureType_DIFFUSE, texIndex, &path);
+	aiReturn texFound = scene->mMaterials[index]->GetTexture(aiTextureType_UNKNOWN, texIndex, &path);
 	if(texFound == AI_SUCCESS)
 	{
 		filename = path.data;
 		//TODO: don't know if this works, adapted it from MeshFactory.cpp
-		filename = filename.substr(filename.find_last_of("/\\") +1);
+		//filename = filename.substr(filename.find_last_of("/\\") +1);
 
 		//save filename for texture
 		texture.setFilename(filename);

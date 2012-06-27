@@ -78,9 +78,7 @@ Mesh ModelManager::createMeshFromAiMesh(const aiScene* scene, aiMesh* mesh)
 	if(mesh->mTextureCoords[0] != NULL)
 	{
 		printf("Loading texture..\n");
-
 		hasTexture = true;
-
 		texture = loadTexture(scene, mesh->mMaterialIndex);
 	}
 	else

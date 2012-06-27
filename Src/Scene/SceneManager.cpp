@@ -21,7 +21,7 @@ void SceneManager::initialize()
 {
 	try
 	{
-		piano_ = modelManager_.loadModel(DUCKMODEL);
+		piano_ = modelManager_.loadModel(PIANOMODEL);
 
 		piano_->translate(glm::vec3(0, -40, -200));
 		/**
