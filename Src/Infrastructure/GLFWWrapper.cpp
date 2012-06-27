@@ -8,6 +8,12 @@
 
 #include "glm/glm.hpp"
 #include "GLFWWrapper.h"
+#include "../Utility/OpenGL.h"
+
+int GLFWCALL windowCloseCallback()
+{
+	return GL_TRUE;
+}
 
 GLFWWrapper::GLFWWrapper()
 {
@@ -27,6 +33,7 @@ void GLFWWrapper::initialize() const
 		throw GLFWException("Error at init of alut\n");
 	}
 
+	glfwSetWindowCloseCallback(windowCloseCallback);
 }
 
 void GLFWWrapper::terminate() const

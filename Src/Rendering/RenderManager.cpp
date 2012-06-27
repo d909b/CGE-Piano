@@ -34,12 +34,16 @@ void RenderManager::initialize(int width, int height)
 	glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
 	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
+	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel(GL_SMOOTH);
 
 	glClearColor(125.f/255.f, 125.f/255.f, 125.f/255.f, 1.0f);
+
+	width_ = width;
+	height_ = height;
 }
 
 void RenderManager::renderObjects(const std::list<boost::shared_ptr<Object> > objects)
@@ -49,8 +53,12 @@ void RenderManager::renderObjects(const std::list<boost::shared_ptr<Object> > ob
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
+	float aspect = (float)width_ / (float)height_;
+
 	/** Set up the perspective transformation. */
-	glFrustum(-2., 2., -2., 2., 1., 100.);
+	glm::mat4 projection = glm::perspective(85.f, aspect, 0.1f, 1000.f);
+
+	glMultMatrixf(glm::value_ptr(projection));
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -85,7 +93,7 @@ void RenderManager::renderObjects(const std::list<boost::shared_ptr<Object> > ob
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 			glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), &first.textureCoordinates[0]);
 
-			glBindTexture(GL_TEXTURE_2D, (unsigned int)texture.getTextureId());
+			glBindTexture(GL_TEXTURE_2D, texture.getTextureId());
 			glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, &indices[0]);
 		}
 

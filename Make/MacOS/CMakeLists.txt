@@ -24,6 +24,12 @@ ADD_LIBRARY(assimp STATIC IMPORTED)
 
 SET_PROPERTY(TARGET assimp 
 		     PROPERTY
-             IMPORTED_LOCATION "Lib/MacOS/libassimpd.a")
+             IMPORTED_LOCATION "Lib/MacOS/libassimp.a")
+             
+ADD_LIBRARY(devIL STATIC IMPORTED)
+             
+SET_PROPERTY(TARGET devIL 
+		     PROPERTY
+             IMPORTED_LOCATION "Lib/MacOS/libIL.a")
 
-TARGET_LINK_LIBRARIES(PianoScene ${OPENGL_LIBRARY} ${COCOA_LIBRARY} ${OPENAL_LIBRARY} glfw assimp)
+TARGET_LINK_LIBRARIES(PianoScene ${OPENGL_LIBRARY} ${COCOA_LIBRARY} ${OPENAL_LIBRARY} glfw assimp devIL)

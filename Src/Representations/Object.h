@@ -8,8 +8,8 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include "assimp/aiScene.h"
-#include "../ModelLoader/MyMesh.h"
 #include "Mesh.h"
 
 class Object
@@ -21,6 +21,9 @@ public:
 	glm::vec3 getTranslation() const;
 	glm::mat3 getRotation() const;
 	std::vector<Mesh> getMeshes() const;
+
+	void translate(glm::vec3 translation);
+	void rotate(float angle, glm::vec3 axis);
 private:
 	glm::vec3 translation_;
 	glm::mat3 rotation_;
