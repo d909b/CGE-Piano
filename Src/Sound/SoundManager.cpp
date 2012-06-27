@@ -7,10 +7,13 @@
 
 #include "SoundManager.h"
 
-#include <AL/alut.h>
 SoundManager::SoundManager()
 {
-	;
+	alutInit(0,NULL);
+	if(alutGetError() != ALUT_ERROR_NO_ERROR)
+	{
+		throw SoundManagerException("Error at init of alut\n");
+	}
 }
 
 SoundManager::~SoundManager()
@@ -49,6 +52,7 @@ void SoundManager::loadSoundBuffers(std::string file[])
 
 	for(int i=0; i<NUM_BUFFERS;i++)
 	{
+		std::cout << file[i] << std::endl;
 		buffer_[i] = alutCreateBufferFromFile(file[i].c_str());
 		if(alutGetError() != ALUT_ERROR_NO_ERROR)
 		{

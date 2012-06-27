@@ -12,7 +12,6 @@
 #include "../Rendering/RenderManager.h"
 #include "../Sound/SoundManager.h"
 #include "../Utility/OpenAL.h"
-#include <AL/alut.h>
 
 class ApplicationManager
 {

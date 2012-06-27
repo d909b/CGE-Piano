@@ -6,9 +6,7 @@
  */
 
 
-#include "glm/glm.hpp"
 #include "GLFWWrapper.h"
-#include "../Utility/OpenGL.h"
 
 int GLFWCALL windowCloseCallback()
 {
@@ -25,12 +23,6 @@ void GLFWWrapper::initialize() const
 	if(glfwInit() != GL_TRUE)
 	{
 		throw GLFWException("Failed to initialize GLFW.");
-	}
-
-	alutInit(0,NULL);
-	if(alutGetError() != ALUT_ERROR_NO_ERROR)
-	{
-		throw GLFWException("Error at init of alut\n");
 	}
 
 	glfwSetWindowCloseCallback(windowCloseCallback);

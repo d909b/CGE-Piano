@@ -38,9 +38,9 @@ void ApplicationManager::applicationStarted(int argc, char** argv)
 	glfwWrapper_.enable(GLFW_STICKY_KEYS);
 
 	//test the sound manager
-	std::string files[] = {"/home/steindl/git/CGE-Piano/Src/Sound/MetronomeSounds/0.wav",
-			"/home/steindl/git/CGE-Piano/Src/Sound/PianoSounds/1.wav",
-			"/home/steindl/git/CGE-Piano/Src/Sound/PianoSounds/2.wav"
+	std::string files[] = {"Resources/Sounds/MetronomeSounds/0.wav",
+			"Resources/Sounds/PianoSounds/1.wav",
+			"Resources/Sounds/PianoSounds/2.wav"
 			};
 
 	soundManager_.loadSoundBuffers(files);

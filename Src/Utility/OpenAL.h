@@ -7,6 +7,8 @@
 
 #if __CDT_PARSER__
 	#include <al.h>
+	#include <alc.h>
+	#include <alut.h>
 #else
 	#if __APPLE__
 		#include <OpenAL/al.h>

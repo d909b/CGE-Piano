@@ -12,8 +12,8 @@
 #include "../Representations/Object.h"
 #include "../ModelLoader/ModelManager.h"
 
-#define DUCKMODEL "./3dModels/duck.dae"
-#define PIANOMODEL "./3dModels/blackPiano.3DS"
+#define DUCKMODEL "Resources/3dModels/duck.dae"
+#define PIANOMODEL "Resources/3dModels/blackPiano.3DS"
 
 class SceneManager
 {

@@ -7,11 +7,9 @@
 
 #pragma once
 
-#include "../Utility/OpenAL.h"
 #include <iostream>
-#include <string>
-#include <AL/al.h>
-#include <AL/alc.h>
+#include "../Utility/OpenAL.h"
+#include "../Utility/MessagedException.h"
 
 #define NUM_BUFFERS 3
 #define NUM_SOURCES 3
@@ -27,4 +25,12 @@ private:
 	ALuint buffer_[NUM_BUFFERS];
 	ALuint source_[NUM_SOURCES];
 	ALint iState_;
+};
+
+class SoundManagerException : MessagedException
+{
+public:
+	SoundManagerException(std::string message) :
+		MessagedException(message)
+	{;}
 };
