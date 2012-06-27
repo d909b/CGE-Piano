@@ -25,29 +25,14 @@ class ModelManager
 public:
 	ModelManager();
 	virtual ~ModelManager();
+
 	boost::shared_ptr<Object> loadModel(std::string file);
-	boost::shared_ptr<Object> loadMeshes();
-
-	const aiScene* getAiScene();
-	aiVector3D getSceneCenter();
-	Texture loadTexture(int index);
-
-	void getBoundingBox (struct aiVector3D* min, struct aiVector3D* max);
-	void getBoundingBoxForNode (const struct aiNode* nd, struct aiVector3D* min, struct aiVector3D* max);
-	void setScaleFactor(struct aiVector3D scene_min, struct aiVector3D scene_max);
-	float getScaleFactor();
-
 private:
 	TextureLoader textureLoader_;
-	const aiScene* scene_;
-	Assimp::Importer importer_;
-	struct aiVector3D scene_min_;
-	struct aiVector3D scene_max_;
-	struct aiVector3D scene_center_;
-	float scaleFactor_;
 
 	Mesh createMeshFromAiMesh(const aiScene* scene, aiMesh* mesh);
 	std::vector<Mesh> getMeshesFromAiScene(const aiScene* scene);
+	Texture loadTexture(const aiScene* scene, int index);
 };
 
 class ModelManagerException : public MessagedException

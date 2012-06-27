@@ -10,6 +10,10 @@
 #include "GLFWWrapper.h"
 #include "../Utility/OpenGL.h"
 
+int GLFWCALL windowCloseCallback()
+{
+	return GL_TRUE;
+}
 
 GLFWWrapper::GLFWWrapper()
 {
@@ -18,17 +22,12 @@ GLFWWrapper::GLFWWrapper()
 
 void GLFWWrapper::initialize() const
 {
-	/*
-	GLenum err = glewInit();
-	if(GLEW_OK != err)
-	{
-		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
-	}
-*/
 	if(glfwInit() != GL_TRUE)
 	{
 		throw GLFWException("Failed to initialize GLFW.");
 	}
+
+	glfwSetWindowCloseCallback(windowCloseCallback);
 }
 
 void GLFWWrapper::terminate() const

@@ -21,7 +21,9 @@ void SceneManager::initialize()
 {
 	try
 	{
-		piano_ = modelManager_.loadModel(PIANOMODEL);
+		piano_ = modelManager_.loadModel(DUCKMODEL);
+
+		piano_->translate(glm::vec3(0, -40, -200));
 		/**
 		 * metronom_ = modelManager.loadModel(METRONOMMODEL);
 		 * room_ = modelManager.loadModel(ROOMMODEL);
@@ -38,6 +40,8 @@ void SceneManager::initialize()
 void SceneManager::update(double deltaTime)
 {
 	// Update object states here.
+
+	piano_->rotate(deltaTime * 15, glm::vec3(0, 1, 0));
 
 	/**
 	 * e.g.:

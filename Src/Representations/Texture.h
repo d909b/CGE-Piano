@@ -21,7 +21,7 @@ public:
 		filename_ = filename;
 	}
 
-	void setTextureId(GLuint* textureId) {
+	void setTextureId(GLuint textureId) {
 		textureId_ = textureId;
 	}
 
@@ -29,13 +29,13 @@ public:
 		return filename_;
 	}
 
-	GLuint* getTextureId() const {
+	GLuint getTextureId() const {
 		return textureId_;
 	}
 
 
 private:
 	std::string filename_;
-	GLuint* textureId_;
+	GLuint textureId_;
 };
 
