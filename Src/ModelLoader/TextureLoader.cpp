@@ -10,8 +10,7 @@
 
 TextureLoader::TextureLoader()
 {
-	/* initialization of DevIL */
-	ilInit();
+	;
 }
 
 TextureLoader::~TextureLoader()
@@ -21,6 +20,7 @@ TextureLoader::~TextureLoader()
 
 Texture TextureLoader::loadTexture(const aiScene* scene, unsigned int index)
 {
+	ilInit();
 	ILboolean success;
 
 	Texture texture;

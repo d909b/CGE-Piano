@@ -19,7 +19,7 @@ class ApplicationManager;
 class GLFWWrapper;
 
 #define ROOMMODEL "Resources/3dModels/floor.dae"
-#define PIANOMODEL "Resources/3dModels/grand_piano.3DS"
+#define PIANOMODEL "Resources/3dModels/floor.dae"
 #define DUCKMODEL "Resources/3dModels/duck.dae"
 
 

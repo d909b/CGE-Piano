@@ -42,10 +42,10 @@ void SceneManager::initialize()
 
 	try
 	{
-		piano_ = modelManager_.loadModel(ROOMMODEL);
+		piano_ = modelManager_.loadModel(PIANOMODEL);
 
 		//piano_->rotate(-90, glm::vec3(0, 1, 1));
-		//piano_->translate(glm::vec3(0, -10, -10));
+		piano_->translate(glm::vec3(0, -10, -20));
 
 		/**
 		 * metronom_ = modelManager.loadModel(METRONOMMODEL);
