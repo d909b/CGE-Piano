@@ -8,7 +8,8 @@
 #include "SceneManager.h"
 #include <cstdio>
 
-SceneManager::SceneManager()
+SceneManager::SceneManager(InputManager& inputManager) :
+	inputManager_(inputManager)
 {
 	;
 }
@@ -20,6 +21,8 @@ SceneManager::~SceneManager()
 
 void SceneManager::initialize()
 {
+	inputManager_.addInputListener(&camera_);
+
 	try
 	{
 		piano_ = modelManager_.loadModel(PIANOMODEL);
@@ -59,6 +62,11 @@ void SceneManager::mouseMoved(int x, int y)
 void SceneManager::keyPressed(int key, int action)
 {
 	printf("Key pressed: %d\n", key);
+}
+
+Camera SceneManager::getCamera() const
+{
+	return camera_;
 }
 
 std::list<boost::shared_ptr<Object> > SceneManager::getObjects() const

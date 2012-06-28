@@ -7,14 +7,23 @@
 
 #include "Camera.h"
 
-Camera::Camera()
+Camera::Camera() :
+	Actor()
 {
-	// TODO Auto-generated constructor stub
-
+	;
 }
 
 Camera::~Camera()
 {
-	// TODO Auto-generated destructor stub
+	;
 }
 
+void Camera::mouseMoved(int x, int y)
+{
+	printf("Mouse moved: %d %d\n", x, y);
+}
+
+void Camera::keyPressed(int key, int action)
+{
+	printf("Key pressed: %d\n", key);
+}

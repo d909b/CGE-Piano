@@ -13,7 +13,8 @@
 ApplicationManager::ApplicationManager(int framesPerSecond, int numMultiSamples) :
 	framesPerSecond_(framesPerSecond),
 	numMultiSamples_(numMultiSamples),
-	isRunning_(true)
+	isRunning_(true),
+	sceneManager_(inputManager_)
 {
 	;
 }
@@ -32,8 +33,8 @@ void ApplicationManager::applicationStarted(int argc, char** argv)
 	glfwWrapper_.openWindowHint(GLFW_FSAA_SAMPLES, numMultiSamples_);
 	glfwWrapper_.setWindowTitle("Piano Scene");
 	glfwWrapper_.openWindow(width, height,  // width, height
-							8, 8, 8, 8,  // r, g, b, a
-							24, 0,	     // depth, stencil
+							8, 8, 8, 8,     // r, g, b, a
+							24, 0,	        // depth, stencil
 							GLFW_WINDOW);
 
 	glfwWrapper_.enable(GLFW_STICKY_KEYS);
@@ -47,9 +48,9 @@ void ApplicationManager::applicationStarted(int argc, char** argv)
 
 	//test the sound manager
 	std::string files[] = {"Resources/Sounds/MetronomeSounds/0.wav",
-			"Resources/Sounds/PianoSounds/1.wav",
-			"Resources/Sounds/PianoSounds/2.wav"
-			};
+						   "Resources/Sounds/PianoSounds/1.wav",
+						   "Resources/Sounds/PianoSounds/2.wav"
+						   };
 
 	soundManager_.loadSoundBuffers(files);
 	soundManager_.playSound(1);
@@ -86,7 +87,7 @@ void ApplicationManager::mainLoop()
 		double deltaTime = currentTime - lastTime;
 
 		sceneManager_.update(deltaTime);
-		renderManager_.renderObjects(sceneManager_.getObjects());
+		renderManager_.renderObjects(sceneManager_.getCamera(), sceneManager_.getObjects());
 
 		bool escPressed = glfwGetKey( GLFW_KEY_ESC );
 

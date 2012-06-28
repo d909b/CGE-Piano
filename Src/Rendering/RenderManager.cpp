@@ -46,7 +46,7 @@ void RenderManager::initialize(int width, int height)
 	height_ = height;
 }
 
-void RenderManager::renderObjects(const std::list<boost::shared_ptr<Object> > objects)
+void RenderManager::renderObjects(const Camera& camera, const std::list<boost::shared_ptr<Object> > objects)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -64,6 +64,10 @@ void RenderManager::renderObjects(const std::list<boost::shared_ptr<Object> > ob
 	glLoadIdentity();
 
 	/** Set up the camera transformation. */
+	glm::mat4 cameraTranslation = glm::translate(glm::mat4(1.f), camera.getTranslation());
+	glm::mat4 cameraView = cameraTranslation * glm::mat4(camera.getRotation());
+
+	glMultMatrixf(glm::value_ptr(cameraView));
 
 	foreach(boost::shared_ptr<Object> object, objects)
 	{
