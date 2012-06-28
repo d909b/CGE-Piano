@@ -11,7 +11,7 @@
 #include "../Scene/SceneManager.h"
 #include "../Rendering/RenderManager.h"
 #include "../Sound/SoundManager.h"
-#include "../Utility/OpenAL.h"
+#include "../Input/InputManager.h"
 
 class ApplicationManager
 {
@@ -20,6 +20,7 @@ public:
 	virtual ~ApplicationManager();
 
 	void terminateApplication();
+	int windowClosed();
 
 	void applicationStarted(int argc, char** argv);
 	void applicationEnded();
@@ -34,5 +35,6 @@ private:
 	SceneManager sceneManager_;
 	RenderManager renderManager_;
 	SoundManager soundManager_;
+	InputManager inputManager_;
 };
 

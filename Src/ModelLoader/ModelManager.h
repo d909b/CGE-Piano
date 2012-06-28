@@ -17,9 +17,6 @@
 #include "../Representations/Object.h"
 #include "TextureLoader.h"
 
-#define aisgl_min(x,y) (x<y?x:y)
-#define aisgl_max(x,y) (y>x?y:x)
-
 class ModelManager
 {
 public:

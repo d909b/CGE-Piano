@@ -52,7 +52,7 @@ void SoundManager::loadSoundBuffers(std::string file[])
 
 	for(int i=0; i<NUM_BUFFERS;i++)
 	{
-		std::cout << file[i] << std::endl;
+		std::cout << "Loading sound " << file[i] << "." << std::endl;
 		buffer_[i] = alutCreateBufferFromFile(file[i].c_str());
 		if(alutGetError() != ALUT_ERROR_NO_ERROR)
 		{

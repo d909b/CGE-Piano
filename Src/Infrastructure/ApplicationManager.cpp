@@ -6,6 +6,7 @@
  */
 
 #include "ApplicationManager.h"
+#include <boost/bind.hpp>
 
 #define PIANOSOUND "/home/test.wav"
 
@@ -32,10 +33,17 @@ void ApplicationManager::applicationStarted(int argc, char** argv)
 	glfwWrapper_.setWindowTitle("Piano Scene");
 	glfwWrapper_.openWindow(width, height,  // width, height
 							8, 8, 8, 8,  // r, g, b, a
-							8, 8,	     // depth, stencil
+							24, 0,	     // depth, stencil
 							GLFW_WINDOW);
 
 	glfwWrapper_.enable(GLFW_STICKY_KEYS);
+
+	/** Eclipse parser is not smart enough. */
+#ifndef __CDT_PARSER__
+	glfwWrapper_.setWindowCloseCallback(boost::bind(&ApplicationManager::windowClosed, this));
+	glfwWrapper_.setMouseMoveCallback(boost::bind(&InputManager::mouseMoved, &inputManager_, _1, _2));
+	glfwWrapper_.setButtonPressedCallback(boost::bind(&InputManager::keyPressed, &inputManager_, _1, _2));
+#endif
 
 	//test the sound manager
 	std::string files[] = {"Resources/Sounds/MetronomeSounds/0.wav",
@@ -51,6 +59,8 @@ void ApplicationManager::applicationStarted(int argc, char** argv)
 	sceneManager_.initialize();
 
 	renderManager_.initialize(width, height);
+
+	inputManager_.addInputListener(&sceneManager_);
 
 	mainLoop();
 }
@@ -95,5 +105,12 @@ void ApplicationManager::mainLoop()
 
 	applicationEnded();
 }
+
+int ApplicationManager::windowClosed()
+{
+	terminateApplication();
+	return GL_TRUE;
+}
+
 
 

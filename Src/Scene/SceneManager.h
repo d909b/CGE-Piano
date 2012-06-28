@@ -11,11 +11,12 @@
 #include <boost/shared_ptr.hpp>
 #include "../Representations/Object.h"
 #include "../ModelLoader/ModelManager.h"
+#include "../Input/InputManager.h"
 
 #define DUCKMODEL "Resources/3dModels/duck.dae"
 #define PIANOMODEL "Resources/3dModels/blackPiano.3DS"
 
-class SceneManager
+class SceneManager : public InputListener
 {
 public:
 	SceneManager();
@@ -23,6 +24,9 @@ public:
 
 	void initialize();
 	void update(double deltaTime);
+
+	void mouseMoved(int x, int y);
+	void keyPressed(int key, int action);
 
 	std::list<boost::shared_ptr<Object> > getObjects() const;
 private:

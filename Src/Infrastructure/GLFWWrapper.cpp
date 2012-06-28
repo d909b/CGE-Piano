@@ -8,9 +8,23 @@
 
 #include "GLFWWrapper.h"
 
+boost::function<int ()> GLFWWrapper::windowCloseCallback_;
+boost::function<void (int, int)> GLFWWrapper::mouseMoveCallback_;
+boost::function<void (int, int)> GLFWWrapper::buttonPressedCallback_;
+
 int GLFWCALL windowCloseCallback()
 {
-	return GL_TRUE;
+	return GLFWWrapper::windowCloseCallback_();
+}
+
+void GLFWCALL buttonPressedCallback(int key, int action)
+{
+	GLFWWrapper::buttonPressedCallback_(key, action);
+}
+
+void GLFWCALL mouseMoveCallback(int x, int y)
+{
+	GLFWWrapper::mouseMoveCallback_(x, y);
 }
 
 GLFWWrapper::GLFWWrapper()
@@ -24,8 +38,24 @@ void GLFWWrapper::initialize() const
 	{
 		throw GLFWException("Failed to initialize GLFW.");
 	}
+}
 
+void GLFWWrapper::setWindowCloseCallback(boost::function<int (void)> callback)
+{
+	GLFWWrapper::windowCloseCallback_ = callback;
 	glfwSetWindowCloseCallback(windowCloseCallback);
+}
+
+void GLFWWrapper::setMouseMoveCallback(boost::function<void (int, int)> callback)
+{
+	GLFWWrapper::mouseMoveCallback_ = callback;
+	glfwSetMousePosCallback(mouseMoveCallback);
+}
+
+void GLFWWrapper::setButtonPressedCallback(boost::function<void (int, int)> callback)
+{
+	GLFWWrapper::buttonPressedCallback_ = callback;
+	glfwSetKeyCallback(buttonPressedCallback);
 }
 
 void GLFWWrapper::terminate() const

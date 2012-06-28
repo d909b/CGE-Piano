@@ -48,7 +48,7 @@ void RenderManager::initialize(int width, int height)
 
 void RenderManager::renderObjects(const std::list<boost::shared_ptr<Object> > objects)
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();

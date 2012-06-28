@@ -9,6 +9,7 @@
 
 #include <string>
 #include <exception>
+#include <boost/function.hpp>
 #include <glfw.h>
 #include "../Utility/MessagedException.h"
 #include "../Utility/OpenGL.h"
@@ -33,6 +34,10 @@ public:
 	void sleep(double time);
 	double getTime();
 
+	void setWindowCloseCallback(boost::function<int (void)> callback);
+	void setMouseMoveCallback(boost::function<void (int, int)> callback);
+	void setButtonPressedCallback(boost::function<void (int, int)> callback);
+
 	void setWindowTitle(std::string title);
 	void openWindowHint(int target, int hint);
 	void swapBuffers();
@@ -41,6 +46,10 @@ public:
 					int redbits, int greenbits, int bluebits,
 					int alphabits, int depthbits, int stencilbits,
 					int mode) const;
+
+	static boost::function<int ()> windowCloseCallback_;
+	static boost::function<void (int, int)> mouseMoveCallback_;
+	static boost::function<void (int, int)> buttonPressedCallback_;
 };
 
 class GLFWException : public MessagedException

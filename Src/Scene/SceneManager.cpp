@@ -6,6 +6,7 @@
  */
 
 #include "SceneManager.h"
+#include <cstdio>
 
 SceneManager::SceneManager()
 {
@@ -48,6 +49,16 @@ void SceneManager::update(double deltaTime)
 	 * e.g.:
 	 * metronom_.rotate(35.f, 0, 1, 0);
 	 */
+}
+
+void SceneManager::mouseMoved(int x, int y)
+{
+	printf("Mouse moved: %d %d\n", x, y);
+}
+
+void SceneManager::keyPressed(int key, int action)
+{
+	printf("Key pressed: %d\n", key);
 }
 
 std::list<boost::shared_ptr<Object> > SceneManager::getObjects() const
