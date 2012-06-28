@@ -47,24 +47,27 @@ void Camera::handleTranslation(double deltaTime)
 
 	glm::vec3 movement(0.f, 0.f, 0.f);
 
+	glm::vec3 forward = glm::vec3(sinf(viewingAngles_.x), 0, cosf(viewingAngles_.x));
+	glm::vec3 right   = glm::vec3(-forward.z, 0, forward.x);
+
 	if( isPressed('A') )
 	{
-		movement += glm::vec3(1, 0, 0);
+		movement += -right;
 	}
 
 	if( isPressed('D') )
 	{
-		movement += glm::vec3(-1, 0, 0);
+		movement += right;
 	}
 
 	if( isPressed('W') )
 	{
-		movement += glm::vec3(0, 0, 1);
+		movement += forward;
 	}
 
 	if( isPressed('S') )
 	{
-		movement += glm::vec3(0, 0, -1);
+		movement += -forward;
 	}
 
 	/** Only perform if there actually is movement. */
@@ -80,11 +83,10 @@ void Camera::handleRotation(double deltaTime)
 {
 	static const float kRotationSpeed = .1f;
 
-	viewingAngles_.x = kRotationSpeed * (lastMousePosition_.x - mousePosition_.x);
-	viewingAngles_.y = kRotationSpeed * (lastMousePosition_.y - mousePosition_.y);
+	viewingAngles_ = (lastMousePosition_ - mousePosition_) * kRotationSpeed;
 
-	rotate(viewingAngles_.y, glm::vec3(1, 0, 0));
-	rotate(viewingAngles_.x, glm::vec3(0, 1, 0));
+	/**rotate(viewingAngles_.y, glm::vec3(1, 0, 0));
+	rotate(viewingAngles_.x, glm::vec3(0, 1, 0));*/
 
 	lastMousePosition_ = mousePosition_;
 }

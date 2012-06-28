@@ -42,7 +42,7 @@ void SceneManager::initialize()
 
 	try
 	{
-		piano_ = modelManager_.loadModel(PIANOMODEL);
+		piano_ = modelManager_.loadModel(DUCKMODEL);
 
 		piano_->rotate(-90, glm::vec3(1, 0, 0));
 		piano_->translate(glm::vec3(0, -40, -200));

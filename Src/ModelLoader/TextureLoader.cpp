@@ -29,15 +29,16 @@ Texture TextureLoader::loadTexture(const aiScene* scene, unsigned int index)
 	int texIndex = 0;
 	aiString path;	// filename
 
-	aiReturn texFound = scene->mMaterials[index]->GetTexture(aiTextureType_UNKNOWN, texIndex, &path);
+	aiReturn texFound = scene->mMaterials[index]->GetTexture(aiTextureType_DIFFUSE, texIndex, &path);
 	if(texFound == AI_SUCCESS)
 	{
 		filename = path.data;
-		//TODO: don't know if this works, adapted it from MeshFactory.cpp
-		//filename = filename.substr(filename.find_last_of("/\\") +1);
+		filename = filename.substr(filename.find_last_of("/\\") +1);
 
 		//save filename for texture
 		texture.setFilename(filename);
+
+		printf("Filename is: %s\n", filename.c_str());
 	}
 
 	int numTextures = 1;
@@ -53,13 +54,15 @@ Texture TextureLoader::loadTexture(const aiScene* scene, unsigned int index)
 	//save generated textureId for texture
 	texture.setTextureId(textureId[0]);
 
-	//TODO: don't know if this part is needed here
 	//Binding of DevIL image name
 	ilBindImage(imageId[0]);
 	ilEnable(IL_ORIGIN_SET);
 	ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
 
-	std::string fullPath = std::string("3dModels/" + filename);
+	std::string fullPath = std::string("Resources/3dModels/" + filename);
+
+	printf("Texture path is: %s\n", fullPath.c_str());
+
 	success = ilLoadImage(fullPath.c_str());
 
 	if (success)
@@ -84,7 +87,7 @@ Texture TextureLoader::loadTexture(const aiScene* scene, unsigned int index)
 	}
 
 	// Because we have already copied image data into texture data
-	//	we can release memory used by image.
+	// we can release memory used by image.
 	ilDeleteImages(numTextures, imageId);
 
 	//Cleanup
