@@ -18,8 +18,9 @@
 class ApplicationManager;
 class GLFWWrapper;
 
-#define DUCKMODEL "Resources/3dModels/duck.dae"
-#define PIANOMODEL "Resources/3dModels/blackPiano.3DS"
+#define ROOMMODEL "Resources/3dModels/floor.dae"
+#define PIANOMODEL "Resources/3dModels/grand_piano.3DS"
+
 
 class SceneManager : public InputListener, public UpdateListener
 {

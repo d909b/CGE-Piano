@@ -44,12 +44,15 @@ void SceneManager::initialize()
 	{
 		piano_ = modelManager_.loadModel(DUCKMODEL);
 
-		piano_->rotate(-90, glm::vec3(1, 0, 0));
-		piano_->translate(glm::vec3(0, -40, -200));
+		piano_->rotate(-90, glm::vec3(0, 1, 1));
+		piano_->translate(glm::vec3(0, -10, -10));
+
 		/**
 		 * metronom_ = modelManager.loadModel(METRONOMMODEL);
-		 * room_ = modelManager.loadModel(ROOMMODEL);
 		 */
+
+		//room_ = modelManager_.loadModel(ROOMMODEL);
+
 	}
 	catch(const ModelManagerException& e)
 	{
