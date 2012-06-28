@@ -42,6 +42,9 @@ public:
 	void openWindowHint(int target, int hint);
 	void swapBuffers();
 
+	void getWindowSize(int* width, int* height);
+	void setMousePosition(int x, int y);
+
 	void openWindow(int width, int height,
 					int redbits, int greenbits, int bluebits,
 					int alphabits, int depthbits, int stencilbits,

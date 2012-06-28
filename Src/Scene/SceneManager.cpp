@@ -6,10 +6,16 @@
  */
 
 #include "SceneManager.h"
+#include "../Infrastructure/ApplicationManager.h"
+#include "../Infrastructure/GLFWWrapper.h"
 #include <cstdio>
 
-SceneManager::SceneManager(InputManager& inputManager) :
-	inputManager_(inputManager)
+SceneManager::SceneManager(const ApplicationManager& appManager,
+						   InputManager& inputManager,
+						   GLFWWrapper& glfwWrapper) :
+	appManager_(appManager),
+	inputManager_(inputManager),
+	glfwWrapper_(glfwWrapper)
 {
 	;
 }
@@ -21,6 +27,17 @@ SceneManager::~SceneManager()
 
 void SceneManager::initialize()
 {
+	int x, y;
+
+	glfwWrapper_.getWindowSize(&x, &y);
+
+	x /= 2;
+	y /= 2;
+
+	glfwWrapper_.setMousePosition(x, y);
+	camera_.initializeMousePosition(x, y);
+
+	appManager_.addUpdateListener(&camera_);
 	inputManager_.addInputListener(&camera_);
 
 	try
@@ -56,12 +73,12 @@ void SceneManager::update(double deltaTime)
 
 void SceneManager::mouseMoved(int x, int y)
 {
-	printf("Mouse moved: %d %d\n", x, y);
+	;
 }
 
 void SceneManager::keyPressed(int key, int action)
 {
-	printf("Key pressed: %d\n", key);
+	;
 }
 
 Camera SceneManager::getCamera() const

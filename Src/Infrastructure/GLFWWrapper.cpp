@@ -94,6 +94,16 @@ void GLFWWrapper::swapBuffers()
 	glfwSwapBuffers();
 }
 
+void GLFWWrapper::getWindowSize(int* width, int* height)
+{
+	glfwGetWindowSize(width, height);
+}
+
+void GLFWWrapper::setMousePosition(int x, int y)
+{
+	glfwSetMousePos(x, y);
+}
+
 void GLFWWrapper::openWindow(int width, int height, int redbits, int greenbits,
 						     int bluebits, int alphabits, int depthbits, int stencilbits,
 						     int mode) const

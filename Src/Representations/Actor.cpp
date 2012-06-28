@@ -42,3 +42,9 @@ void Actor::rotate(float angle, glm::vec3 axis)
 
 	rotation_ = glm::mat3(res);
 }
+
+void Actor::setRotation(float angle, glm::vec3 axis)
+{
+	rotation_ = glm::mat3( glm::rotate(glm::mat4(1.f), angle, axis) );
+}
+
