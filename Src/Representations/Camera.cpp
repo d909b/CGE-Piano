@@ -89,9 +89,14 @@ void Camera::handleRotation(double deltaTime)
 	rotate(viewingAngles_.x, glm::vec3(0, 1, 0));*/
 
 	if(viewingAngles_.y < -M_PI / 2)
+	{
 		viewingAngles_.y = -M_PI / 2;
+	}
+
 	if(viewingAngles_.y > M_PI / 2)
+	{
 		viewingAngles_.y = M_PI / 2;
+	}
 
 	lastMousePosition_ = mousePosition_;
 }
