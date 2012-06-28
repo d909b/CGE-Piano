@@ -56,7 +56,7 @@ void RenderManager::renderObjects(const Camera& camera, const std::list<boost::s
 	float aspect = (float)width_ / (float)height_;
 
 	/** Set up the perspective transformation. */
-	glm::mat4 projection = glm::perspective(85.f, aspect, 0.1f, 1000.f);
+	glm::mat4 projection = glm::perspective(65.f, aspect, 0.1f, 1000.f);
 
 	glMultMatrixf(glm::value_ptr(projection));
 
@@ -64,8 +64,8 @@ void RenderManager::renderObjects(const Camera& camera, const std::list<boost::s
 	glLoadIdentity();
 
 	/** Set up the camera transformation. */
-	glm::mat4 cameraTranslation = glm::translate(glm::mat4(1.f), camera.getTranslation());
-	glm::mat4 cameraView = cameraTranslation * glm::mat4(camera.getRotation());
+	//glm::mat4 cameraTranslation = glm::translate(glm::mat4(1.f), camera.getTranslation());
+	glm::mat4 cameraView = glm::translate(glm::mat4(camera.getRotation()), camera.getTranslation());
 
 	glMultMatrixf(glm::value_ptr(cameraView));
 

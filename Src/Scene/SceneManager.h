@@ -13,15 +13,19 @@
 #include "../Representations/Camera.h"
 #include "../ModelLoader/ModelManager.h"
 #include "../Input/InputManager.h"
+#include "../Infrastructure/UpdateListener.h"
+
+class ApplicationManager;
+class GLFWWrapper;
 
 #define ROOMMODEL "Resources/3dModels/floor.dae"
 #define PIANOMODEL "Resources/3dModels/grand_piano.3DS"
 
 
-class SceneManager : public InputListener
+class SceneManager : public InputListener, public UpdateListener
 {
 public:
-	SceneManager(InputManager& inputManager);
+	SceneManager(const ApplicationManager& appManager, InputManager& inputManager, GLFWWrapper& glfwWrapper);
 	virtual ~SceneManager();
 
 	void initialize();
@@ -36,7 +40,10 @@ public:
 private:
 	std::list<boost::shared_ptr<Object> > objects_;
 	ModelManager modelManager_;
+
+	const ApplicationManager& appManager_;
 	InputManager& inputManager_;
+	GLFWWrapper& glfwWrapper_;
 
 	Camera camera_;
 	boost::shared_ptr<Object> piano_;

@@ -7,14 +7,13 @@
 
 #include "ApplicationManager.h"
 #include <boost/bind.hpp>
-
-#define PIANOSOUND "/home/test.wav"
+#include "../Utility/foreach.h"
 
 ApplicationManager::ApplicationManager(int framesPerSecond, int numMultiSamples) :
 	framesPerSecond_(framesPerSecond),
 	numMultiSamples_(numMultiSamples),
 	isRunning_(true),
-	sceneManager_(inputManager_)
+	sceneManager_(*this, inputManager_, glfwWrapper_)
 {
 	;
 }
@@ -62,6 +61,9 @@ void ApplicationManager::applicationStarted(int argc, char** argv)
 	renderManager_.initialize(width, height);
 
 	inputManager_.addInputListener(&sceneManager_);
+	inputManager_.addInputListener(this);
+
+	addUpdateListener(&sceneManager_);
 
 	mainLoop();
 }
@@ -76,6 +78,37 @@ void ApplicationManager::terminateApplication()
 	isRunning_ = false;
 }
 
+void ApplicationManager::mouseMoved(int x, int y)
+{
+	// NOP
+}
+
+void ApplicationManager::keyPressed(int key, int action)
+{
+	if(key == GLFW_KEY_ESC && action == GLFW_PRESS)
+	{
+		terminateApplication();
+	}
+}
+
+void ApplicationManager::addUpdateListener(UpdateListener* listener) const
+{
+	listeners_.push_back(listener);
+}
+
+void ApplicationManager::removeUpdateListener(UpdateListener* listener) const
+{
+	auto it = listeners_.begin();
+	for(; it != listeners_.end(); ++it)
+	{
+		if(*it == listener)
+		{
+			listeners_.erase(it);
+			break;
+		}
+	}
+}
+
 void ApplicationManager::mainLoop()
 {
 	static double lastTime = glfwWrapper_.getTime();
@@ -86,15 +119,12 @@ void ApplicationManager::mainLoop()
 		double currentTime = glfwWrapper_.getTime();
 		double deltaTime = currentTime - lastTime;
 
-		sceneManager_.update(deltaTime);
-		renderManager_.renderObjects(sceneManager_.getCamera(), sceneManager_.getObjects());
-
-		bool escPressed = glfwGetKey( GLFW_KEY_ESC );
-
-		if(escPressed == true)
+		foreach(UpdateListener* listener, listeners_)
 		{
-			terminateApplication();
+			listener->update(deltaTime);
 		}
+
+		renderManager_.renderObjects(sceneManager_.getCamera(), sceneManager_.getObjects());
 
 		glfwWrapper_.swapBuffers();
 

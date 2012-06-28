@@ -8,14 +8,7 @@
 #pragma once
 
 #include <list>
-
-class InputListener
-{
-public:
-	virtual ~InputListener() {;}
-	virtual void mouseMoved(int x, int y) = 0;
-	virtual void keyPressed(int key, int action) = 0;
-};
+#include "InputListener.h"
 
 class InputManager
 {
@@ -26,9 +19,9 @@ public:
 	void mouseMoved(int x, int y);
 	void keyPressed(int key, int action);
 
-	void addInputListener(InputListener* listener);
-	void removeInputListener(InputListener* listener);
+	void addInputListener(InputListener* listener) const;
+	void removeInputListener(InputListener* listener) const;
 private:
-	std::list<InputListener*> listeners_;
+	mutable std::list<InputListener*> listeners_;
 };
 

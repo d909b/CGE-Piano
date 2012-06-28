@@ -35,12 +35,12 @@ void InputManager::keyPressed(int key, int action)
 	}
 }
 
-void InputManager::addInputListener(InputListener* listener)
+void InputManager::addInputListener(InputListener* listener) const
 {
 	listeners_.push_back(listener);
 }
 
-void InputManager::removeInputListener(InputListener* listener)
+void InputManager::removeInputListener(InputListener* listener) const
 {
 	auto it = listeners_.begin();
 	for(; it != listeners_.end(); ++it)
