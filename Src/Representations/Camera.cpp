@@ -72,8 +72,6 @@ void Camera::handleTranslation(double deltaTime)
 	{
 		movement = glm::normalize(movement) * kMovementSpeed;
 
-		printf("%f %f %f\n", movement.x, movement.y, movement.z);
-
 		translate(movement);
 	}
 }

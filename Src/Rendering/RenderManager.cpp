@@ -56,7 +56,7 @@ void RenderManager::renderObjects(const Camera& camera, const std::list<boost::s
 	float aspect = (float)width_ / (float)height_;
 
 	/** Set up the perspective transformation. */
-	glm::mat4 projection = glm::perspective(85.f, aspect, 0.1f, 1000.f);
+	glm::mat4 projection = glm::perspective(65.f, aspect, 0.1f, 1000.f);
 
 	glMultMatrixf(glm::value_ptr(projection));
 
