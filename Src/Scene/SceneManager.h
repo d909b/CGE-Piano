@@ -20,6 +20,7 @@ class GLFWWrapper;
 
 #define ROOMMODEL "Resources/3dModels/floor.dae"
 #define PIANOMODEL "Resources/3dModels/grand_piano.3DS"
+#define DUCKMODEL "Resources/3dModels/duck.dae"
 
 
 class SceneManager : public InputListener, public UpdateListener
