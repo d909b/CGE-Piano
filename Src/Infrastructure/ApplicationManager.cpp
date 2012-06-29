@@ -45,16 +45,6 @@ void ApplicationManager::applicationStarted(int argc, char** argv)
 	glfwWrapper_.setButtonPressedCallback(boost::bind(&InputManager::keyPressed, &inputManager_, _1, _2));
 #endif
 
-	//test the sound manager
-	std::string files[] = {"Resources/Sounds/MetronomeSounds/0.wav",
-						   "Resources/Sounds/PianoSounds/1.wav",
-						   "Resources/Sounds/PianoSounds/2.wav"
-						   };
-
-	soundManager_.loadSoundBuffers(files);
-	soundManager_.playSound(1);
-	soundManager_.playSound(2);
-
 	//load all Objects in the application
 	sceneManager_.initialize();
 

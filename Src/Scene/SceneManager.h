@@ -14,6 +14,7 @@
 #include "../ModelLoader/ModelManager.h"
 #include "../Input/InputManager.h"
 #include "../Infrastructure/UpdateListener.h"
+#include "../Sound/SoundManager.h"
 
 class ApplicationManager;
 class GLFWWrapper;
@@ -45,6 +46,7 @@ private:
 
 	const ApplicationManager& appManager_;
 	InputManager& inputManager_;
+	SoundManager soundManager_;
 	GLFWWrapper& glfwWrapper_;
 
 	Camera camera_;
@@ -53,5 +55,7 @@ private:
 	boost::shared_ptr<Object> floor_;
 	boost::shared_ptr<Object> swinger_;
 	boost::shared_ptr<Object> metronome_;
+
+	bool ismetronome;
 };
 

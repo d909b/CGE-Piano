@@ -14,6 +14,23 @@ SoundManager::SoundManager()
 	{
 		throw SoundManagerException("Error at init of alut\n");
 	}
+
+	files_[0] = "Resources/Sounds/MetronomeSounds/0.wav";
+	files_[1] = "Resources/Sounds/PianoSounds/1.wav";
+	files_[2] = "Resources/Sounds/PianoSounds/2.wav";
+	files_[3] = "Resources/Sounds/PianoSounds/3.wav";
+	files_[4] = "Resources/Sounds/PianoSounds/4.wav";
+	files_[5] = "Resources/Sounds/PianoSounds/5.wav";
+	files_[6] = "Resources/Sounds/PianoSounds/6.wav";
+	files_[7] = "Resources/Sounds/PianoSounds/7.wav";
+	files_[8] = "Resources/Sounds/PianoSounds/8.wav";
+	files_[9] = "Resources/Sounds/PianoSounds/9.wav";
+	files_[10] = "Resources/Sounds/PianoSounds/10.wav";
+	files_[11] = "Resources/Sounds/PianoSounds/11.wav";
+	files_[12] = "Resources/Sounds/PianoSounds/12.wav";
+	files_[13] = "Resources/Sounds/PianoSounds/13.wav";
+	files_[14] = "Resources/Sounds/PianoSounds/intro1.wav";
+	files_[15] = "Resources/Sounds/PianoSounds/intro2.wav";
 }
 
 SoundManager::~SoundManager()
@@ -23,7 +40,7 @@ SoundManager::~SoundManager()
 	alutExit();
 }
 
-void SoundManager::loadSoundBuffers(std::string file[])
+void SoundManager::loadSoundBuffers()
 {
 	ALfloat listenerPos[] = {0.0,0.0,4.0};
 	ALfloat listenerVel[] = {0.0,0.0,0.0};
@@ -52,8 +69,8 @@ void SoundManager::loadSoundBuffers(std::string file[])
 
 	for(int i=0; i<NUM_BUFFERS;i++)
 	{
-		std::cout << "Loading sound " << file[i] << "." << std::endl;
-		buffer_[i] = alutCreateBufferFromFile(file[i].c_str());
+		std::cout << "Loading sound " << files_[i] << "." << std::endl;
+		buffer_[i] = alutCreateBufferFromFile(files_[i].c_str());
 		if(alutGetError() != ALUT_ERROR_NO_ERROR)
 		{
 			std::cerr << "Error when creating the buffer for the sound\n";
@@ -70,17 +87,33 @@ void SoundManager::loadSoundBuffers(std::string file[])
 
 		alSourcei(source_[i], AL_LOOPING, AL_FALSE);
 	}
+
+	//repeat metronome klick
+	alSourcei(source_[0], AL_LOOPING, AL_TRUE);
 }
 
 
 void SoundManager::playSound(unsigned int numSound)
 {
 	alSourcePlay(source_[numSound]);
-/*
-	do
-	{
-		usleep(100);
-		alGetSourcei(source_[numSound], AL_SOURCE_STATE, &iState_);
-	} while (iState_ == AL_PLAYING);
-*/
+}
+
+void SoundManager::startMetronome()
+{
+	alSourcePlay(source_[0]);
+}
+
+void SoundManager::stopMetronome()
+{
+	alSourceStop(source_[0]);
+}
+
+void SoundManager::setSoundLoop()
+{
+	playing_ = true;
+}
+
+void SoundManager::unsetSoundLoop()
+{
+	playing_ = false;
 }
