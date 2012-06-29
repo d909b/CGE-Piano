@@ -28,6 +28,8 @@ SceneManager::~SceneManager()
 void SceneManager::initialize()
 {
 	int x, y;
+
+	//needed for metronome sound loop
 	ismetronome = false;
 
 	glfwWrapper_.getWindowSize(&x, &y);

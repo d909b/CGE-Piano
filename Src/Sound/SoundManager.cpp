@@ -107,13 +107,3 @@ void SoundManager::stopMetronome()
 {
 	alSourceStop(source_[0]);
 }
-
-void SoundManager::setSoundLoop()
-{
-	playing_ = true;
-}
-
-void SoundManager::unsetSoundLoop()
-{
-	playing_ = false;
-}
