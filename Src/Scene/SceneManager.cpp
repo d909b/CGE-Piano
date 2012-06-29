@@ -44,12 +44,13 @@ void SceneManager::initialize()
 	{
 		piano_ = modelManager_.loadModel(PIANOMODEL);
 
-		metronom_ = modelManager_.loadModel(METRONOMMODEL);
+		wall_ = modelManager_.loadModel(WALLMODEL);
 
-		//swinger_ = modelManager_.loadModel(SWINGER);
+		floor_ = modelManager_.loadModel(ROOMMODEL);
 
-		//roomfloor_ = modelManager_.loadModel(ROOMMODEL);
+		metronome_ = modelManager_.loadModel(METRONOMMODEL);
 
+		swinger_ = modelManager_.loadModel(SWINGER);
 	}
 	catch(const ModelManagerException& e)
 	{
@@ -57,8 +58,10 @@ void SceneManager::initialize()
 	}
 
 	objects_.push_back(piano_);
-	//objects_.push_back(metronom_);
-	//objects_.push_back(swinger_);
+	objects_.push_back(wall_);
+	objects_.push_back(floor_);
+	objects_.push_back(metronome_);
+	objects_.push_back(swinger_);
 }
 
 void SceneManager::update(double deltaTime)
@@ -67,10 +70,8 @@ void SceneManager::update(double deltaTime)
 
 	piano_->rotate(deltaTime * 15, glm::vec3(1, 0, 0));
 
-	/**
-	 * e.g.:
-	 * metronom_.rotate(35.f, 0, 1, 0);
-	 */
+	swinger_->rotate(deltaTime * 15, glm::vec3(0, 1, 0));
+
 }
 
 void SceneManager::mouseMoved(int x, int y)
