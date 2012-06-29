@@ -81,12 +81,22 @@ void Camera::handleTranslation(double deltaTime)
 
 void Camera::handleRotation(double deltaTime)
 {
-	static const float kRotationSpeed = .1f;
+	static const float kRotationSpeed = .01f;
 
-	viewingAngles_ = (lastMousePosition_ - mousePosition_) * kRotationSpeed;
+	viewingAngles_ += (lastMousePosition_ - mousePosition_) * kRotationSpeed;
 
 	/**rotate(viewingAngles_.y, glm::vec3(1, 0, 0));
 	rotate(viewingAngles_.x, glm::vec3(0, 1, 0));*/
+
+	if(viewingAngles_.y < -M_PI / 2)
+	{
+		viewingAngles_.y = -M_PI / 2;
+	}
+
+	if(viewingAngles_.y > M_PI / 2)
+	{
+		viewingAngles_.y = M_PI / 2;
+	}
 
 	lastMousePosition_ = mousePosition_;
 }

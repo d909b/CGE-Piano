@@ -17,10 +17,16 @@ SET_PROPERTY(TARGET glfw
 		     PROPERTY
              IMPORTED_LOCATION "Lib/Linux/libglfw.a")
 
+ADD_LIBRARY(libjpeg STATIC IMPORTED)
+
+SET_PROPERTY(TARGET libjpeg 
+		     PROPERTY
+             IMPORTED_LOCATION "Lib/Linux/libjpeg.a")
+
 ADD_LIBRARY(devIL STATIC IMPORTED)
              
 SET_PROPERTY(TARGET devIL 
 		     PROPERTY
              IMPORTED_LOCATION "Lib/Linux/libIL.a")
              
-TARGET_LINK_LIBRARIES(PianoScene devIL glfw ${OPENGL_LIBRARIES} assimp openal alut)
+TARGET_LINK_LIBRARIES(PianoScene devIL libjpeg glfw ${OPENGL_LIBRARIES} assimp openal alut)

@@ -19,9 +19,9 @@ class ApplicationManager;
 class GLFWWrapper;
 
 #define ROOMMODEL "Resources/3dModels/floor.dae"
-#define PIANOMODEL "Resources/3dModels/floor.dae"
-#define DUCKMODEL "Resources/3dModels/duck.dae"
-
+#define PIANOMODEL "Resources/3dModels/grand_piano.3DS"
+#define METRONOMMODEL "Resources/3dModels/metronome.obj"
+#define SWINGER "Resources/3dModels/swingding.dae"
 
 class SceneManager : public InputListener, public UpdateListener
 {
@@ -49,6 +49,11 @@ private:
 	Camera camera_;
 	boost::shared_ptr<Object> piano_;
 	boost::shared_ptr<Object> metronom_;
-	boost::shared_ptr<Object> room_;
+	boost::shared_ptr<Object> swinger_;
+	boost::shared_ptr<Object> roomfloor_;
+	boost::shared_ptr<Object> roomwall1_;
+	boost::shared_ptr<Object> roomwall2_;
+	boost::shared_ptr<Object> roomwall3_;
+	boost::shared_ptr<Object> roomwall4_;
 };
 

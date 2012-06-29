@@ -38,6 +38,9 @@ void GLFWWrapper::initialize() const
 	{
 		throw GLFWException("Failed to initialize GLFW.");
 	}
+
+
+	ilInit();
 }
 
 void GLFWWrapper::setWindowCloseCallback(boost::function<int (void)> callback)

@@ -64,8 +64,15 @@ void RenderManager::renderObjects(const Camera& camera, const std::list<boost::s
 	glLoadIdentity();
 
 	/** Set up the camera transformation. */
-	//glm::mat4 cameraTranslation = glm::translate(glm::mat4(1.f), camera.getTranslation());
-	glm::mat4 cameraView = glm::translate(glm::mat4(camera.getRotation()), camera.getTranslation());
+	glm::vec3 position = camera.getTranslation();
+	glm::vec2 angles = camera.getViewingAngles();
+
+	glm::vec3 direction;
+	direction.x = sinf(angles.x) * cosf(angles.y);
+	direction.y = sinf(angles.y);
+	direction.z = cosf(angles.x) * cosf(angles.y);
+
+	glm::mat4 cameraView = glm::lookAt(position, position + direction, glm::vec3(0, 1, 0));
 
 	glMultMatrixf(glm::value_ptr(cameraView));
 

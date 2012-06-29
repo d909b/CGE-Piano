@@ -20,7 +20,6 @@ TextureLoader::~TextureLoader()
 
 Texture TextureLoader::loadTexture(const aiScene* scene, unsigned int index)
 {
-	ilInit();
 	ILboolean success;
 
 	Texture texture;
@@ -63,7 +62,7 @@ Texture TextureLoader::loadTexture(const aiScene* scene, unsigned int index)
 
 	printf("Texture path is: %s\n", fullPath.c_str());
 
-	success = ilLoadImage(fullPath.c_str());
+	success = ilLoad(IL_TYPE_UNKNOWN, fullPath.c_str());
 
 	if (success)
 	{
@@ -78,7 +77,7 @@ Texture TextureLoader::loadTexture(const aiScene* scene, unsigned int index)
 				ilGetInteger(IL_IMAGE_HEIGHT), 0, GL_RGBA, GL_UNSIGNED_BYTE,
 				ilGetData());
 
-		/** Unbind texture state after loading. */
+		/* Unbind texture state after loading. */
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 	else

@@ -14,6 +14,7 @@
 #include "../Utility/MessagedException.h"
 #include "../Utility/OpenGL.h"
 #include "../Utility/OpenAL.h"
+#include <il.h>
 
 /**
  * @class GLFWWrapper
