@@ -5,8 +5,8 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.58.0 r37702</authoring_tool>
     </contributor>
-    <created>2012-06-28T18:10:36</created>
-    <modified>2012-06-28T18:10:36</modified>
+    <created>2012-06-29T17:24:42</created>
+    <modified>2012-06-29T17:24:42</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
@@ -96,21 +96,21 @@
     </light>
   </library_lights>
   <library_images>
-    <image id="stwood_tga" name="stwood_tga">
-      <init_from>Textures/stwood.tga</init_from>
+    <image id="stwood_tga_001" name="stwood_tga_001">
+      <init_from>Projekt/stwood.tga</init_from>
     </image>
   </library_images>
   <library_effects>
     <effect id="bwall-effect">
       <profile_COMMON>
-        <newparam sid="stwood_tga-surface">
+        <newparam sid="stwood_tga_001-surface">
           <surface type="2D">
-            <init_from>stwood_tga</init_from>
+            <init_from>stwood_tga_001</init_from>
           </surface>
         </newparam>
-        <newparam sid="stwood_tga-sampler">
+        <newparam sid="stwood_tga_001-sampler">
           <sampler2D>
-            <source>stwood_tga-surface</source>
+            <source>stwood_tga_001-surface</source>
           </sampler2D>
         </newparam>
         <technique sid="common">
@@ -122,7 +122,7 @@
               <color>0 0 0 1</color>
             </ambient>
             <diffuse>
-              <texture texture="stwood_tga-sampler" texcoord="UVTex"/>
+              <texture texture="stwood_tga_001-sampler" texcoord="UVTex"/>
             </diffuse>
             <specular>
               <color>0.5 0.5 0.5 1</color>
