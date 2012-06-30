@@ -26,12 +26,10 @@ void RenderManager::initialize(int width, int height)
 	glViewport(0, 0, width, height);
 
 	GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat mat_shininess[] = { 5.0 };
-    GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
+	GLfloat mat_shininess[] = { 50.0 };
 
 	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 	glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_LIGHTING);
@@ -75,6 +73,9 @@ void RenderManager::renderObjects(const Camera& camera, const std::list<boost::s
 
 	glMultMatrixf(glm::value_ptr(cameraView));
 
+    GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
 	foreach(boost::shared_ptr<Object> object, objects)
 	{
 		glPushMatrix();
@@ -82,7 +83,7 @@ void RenderManager::renderObjects(const Camera& camera, const std::list<boost::s
 		/** Set up the model-view transformation. */
 		glm::mat4 translation = glm::translate(glm::mat4(1.f), object->getTranslation());
 		glm::mat4 rotation    = glm::mat4(object->getRotation());
-		glm::mat4 scale       = glm::scale(glm::mat4(1.f), glm::vec3(object->getUniformScale()));
+		glm::mat4 scale       = glm::scale(glm::mat4(1.f), glm::vec3(object->getScale()));
 
 		glm::mat4 modelViewMatrix = translation * rotation * scale;
 

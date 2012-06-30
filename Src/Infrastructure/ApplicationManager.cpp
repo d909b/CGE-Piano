@@ -25,7 +25,8 @@ ApplicationManager::~ApplicationManager()
 
 void ApplicationManager::applicationStarted(int argc, char** argv)
 {
-	int width = 1024, height = 600;
+	int width = 1024;
+	int height = 640;
 
 	glfwWrapper_.initialize();
 
@@ -34,7 +35,7 @@ void ApplicationManager::applicationStarted(int argc, char** argv)
 	glfwWrapper_.openWindow(width, height,  // width, height
 							8, 8, 8, 8,     // r, g, b, a
 							24, 0,	        // depth, stencil
-							GLFW_WINDOW);
+							GLFW_FULLSCREEN);
 
 	glfwWrapper_.enable(GLFW_STICKY_KEYS);
 

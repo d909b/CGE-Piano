@@ -18,6 +18,7 @@ public:
 	virtual ~Object();
 
 	std::vector<Mesh> getMeshes() const;
+	virtual void scale(glm::vec3 scale);
 
 private:
 	std::vector<Mesh> meshes_;

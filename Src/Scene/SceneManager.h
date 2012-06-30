@@ -59,9 +59,10 @@ private:
 	boost::shared_ptr<Object> wall_right_;
 	boost::shared_ptr<Object> wall_back_;
 	boost::shared_ptr<Object> floor_;
+	boost::shared_ptr<Object> roof_;
 	boost::shared_ptr<Object> swinger_;
 	boost::shared_ptr<Object> metronome_;
 
-	bool ismetronome;
+	bool isMetronomeOn_;
 };
 

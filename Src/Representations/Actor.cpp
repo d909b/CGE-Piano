@@ -44,12 +44,14 @@ void Actor::rotate(float angle, glm::vec3 axis)
 	rotation_ = glm::mat3(res);
 }
 
-void Actor::scaleUniform(float factor)
+void Actor::scale(glm::vec3 factor)
 {
-	scale_ *= factor;
+	scale_.x *= factor.x;
+	scale_.y *= factor.y;
+	scale_.z *= factor.z;
 }
 
-float Actor::getUniformScale() const
+glm::vec3 Actor::getScale() const
 {
 	return scale_;
 }

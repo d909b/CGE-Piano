@@ -15,7 +15,8 @@ SceneManager::SceneManager(const ApplicationManager& appManager,
 						   GLFWWrapper& glfwWrapper) :
 	appManager_(appManager),
 	inputManager_(inputManager),
-	glfwWrapper_(glfwWrapper)
+	glfwWrapper_(glfwWrapper),
+	isMetronomeOn_(false)
 {
 	;
 }
@@ -28,9 +29,6 @@ SceneManager::~SceneManager()
 void SceneManager::initialize()
 {
 	int x, y;
-
-	//needed for metronome sound loop
-	ismetronome = false;
 
 	glfwWrapper_.getWindowSize(&x, &y);
 
@@ -54,15 +52,16 @@ void SceneManager::initialize()
 		piano_ = modelManager_.loadModel(PIANOMODEL);
 
 		wall_front_ = modelManager_.loadModel(WALLMODEL);
-		wall_back_ = modelManager_.loadModel(WALLMODEL);
-		wall_left_ = modelManager_.loadModel(WALLMODEL);
+		wall_back_  = modelManager_.loadModel(WALLMODEL);
+		wall_left_  = modelManager_.loadModel(WALLMODEL);
 		wall_right_ = modelManager_.loadModel(WALLMODEL);
 
 		floor_ = modelManager_.loadModel(ROOMMODEL);
+		roof_  = modelManager_.loadModel(ROOMMODEL);
 
 		metronome_ = modelManager_.loadModel(METRONOMMODEL);
 
-		swinger_ = modelManager_.loadModel(SWINGER);
+		swinger_   = modelManager_.loadModel(SWINGER);
 	}
 	catch(const ModelManagerException& e)
 	{
@@ -78,46 +77,97 @@ void SceneManager::initialize()
 	objects_.push_back(wall_left_);
 	objects_.push_back(wall_right_);
 	objects_.push_back(floor_);
+	objects_.push_back(roof_);
 	objects_.push_back(metronome_);
 	objects_.push_back(swinger_);
 }
 
 void SceneManager::setupWalls()
 {
-	float scaleFactor = 5.f;
+	glm::vec3 scaleFactor(5.f, 5.f, 5.f);
+	float halfRoomWidth = 4.22f;
+	float halfRoamLength = 2.67f;
 
-	wall_front_->scaleUniform(scaleFactor);
-	wall_front_->translate(glm::vec3(0, 0, 5));
+	wall_front_->scale(scaleFactor);
+	wall_front_->translate(glm::vec3(0, 0.2, halfRoomWidth));
 	wall_front_->rotate(90.f, glm::vec3(0, 0, 1));
 
-	wall_back_->scaleUniform(scaleFactor);
-	wall_back_->translate(glm::vec3(0, 0, -5));
+	wall_back_->scale(scaleFactor);
+	wall_back_->translate(glm::vec3(0, 0.2, -halfRoomWidth));
 	wall_back_->rotate(90.f, glm::vec3(0, 0, 1));
 
-	wall_left_->scaleUniform(scaleFactor);
-	wall_left_->translate(glm::vec3(-5, 0, 0));
+	glm::vec3 sideScaleFactor(5.f, 7.85f, 5.f);
+	wall_left_->scale(sideScaleFactor);
+	wall_left_->translate(glm::vec3(-halfRoamLength, 0.2, 0));
 	wall_left_->rotate(90.f, glm::vec3(0, 0, 1));
 	wall_left_->rotate(90.f, glm::vec3(1, 0, 0));
 
-	wall_right_->scaleUniform(scaleFactor);
-	wall_right_->translate(glm::vec3(5, 0, 0));
+	wall_right_->scale(sideScaleFactor);
+	wall_right_->translate(glm::vec3(halfRoamLength, 0.2, 0));
 	wall_right_->rotate(90.f, glm::vec3(0, 0, 1));
 	wall_right_->rotate(90.f, glm::vec3(1, 0, 0));
 
-	floor_->scaleUniform(scaleFactor);
+	glm::vec3 floorScale(scaleFactor * 1.569f);
+	floor_->scale(floorScale);
 	floor_->translate(glm::vec3(0, -1.5, 0));
 	floor_->rotate(90.f, glm::vec3(1, 0, 0));
+
+	roof_->scale(floorScale);
+	roof_->translate(glm::vec3(0, 1.5, 0));
+	roof_->rotate(90.f, glm::vec3(1, 0, 0));
 }
 
 void SceneManager::setupItems()
 {
-	piano_->translate(glm::vec3(0, -1, -2.5));
+	piano_->translate(glm::vec3(0, -1, -2.3));
 	piano_->rotate(-90.f, glm::vec3(1, 0, 0));
+
+	glm::vec3 commonTranslation(0.5f, -0.5f, -2.f);
+
+	metronome_->translate(commonTranslation);
+	swinger_->translate(commonTranslation);
+
+	metronome_->rotate(-90.f, glm::vec3(1, 0, 0));
+	metronome_->scale(glm::vec3(0.1f, 0.1f, 0.1f));
+
+	swinger_->translate(glm::vec3(0.09f, 0.1f, 0.05f));
+	swinger_->rotate(-90.f, glm::vec3(1, 0, 0));
+	swinger_->scale(glm::vec3(0.1f, 0.1f, 0.1f));
 }
 
 void SceneManager::update(double deltaTime)
 {
-	// Update object states here.
+
+	static float rotation = 0.f;
+	static bool goingRight = true;
+
+	if(isMetronomeOn_)
+	{
+		const float rotationStep = 10.f;
+		const float maxSwingerDegrees = 30.f;
+
+		if(rotation > maxSwingerDegrees)
+		{
+			goingRight = false;
+		}
+		else if(rotation < -maxSwingerDegrees)
+		{
+			goingRight = true;
+		}
+
+		float currentRotation;
+		if(goingRight)
+		{
+			currentRotation = rotationStep;
+		}
+		else
+		{
+			currentRotation = -rotationStep;
+		}
+
+		swinger_->rotate(currentRotation, glm::vec3(0, 1, 0));
+		rotation += currentRotation;
+	}
 }
 
 void SceneManager::mouseMoved(int x, int y)
@@ -172,15 +222,15 @@ void SceneManager::keyPressed(int key, int action)
 			break;
 		//play metronome
 		case 'M':
-			if(ismetronome)
+			if(isMetronomeOn_)
 			{
 				soundManager_.stopMetronome();
-				ismetronome = false;
+				isMetronomeOn_ = false;
 			}
 			else
 			{
 				soundManager_.startMetronome();
-				ismetronome = true;
+				isMetronomeOn_ = true;
 			}
 			break;
 		default:
