@@ -11,7 +11,7 @@
 #include <il.h>
 
 #include <glfw.h>
-#include "assimp/aiScene.h"
+#include <assimp/aiScene.h>
 #include "../Representations/Texture.h"
 
 class TextureLoader

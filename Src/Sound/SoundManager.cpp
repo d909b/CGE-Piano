@@ -1,6 +1,9 @@
 /*
  * SoundManager.cpp
  *
+ *	To Create the Sounds the following Tutorial was used for inspiration:
+ *		http://www.edenwaith.com/products/pige/tutorials/openal.php
+ *
  *  Created on: Jun 26, 2012
  *      Author: steindl
  */

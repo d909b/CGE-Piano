@@ -10,9 +10,9 @@
 
 #include <iostream>
 #include <boost/shared_ptr.hpp>
-#include "assimp/assimp.hpp"
-#include "assimp/aiScene.h"
-#include "assimp/aiPostProcess.h"
+#include <assimp/assimp.hpp>
+#include <assimp/aiScene.h>
+#include <assimp/aiPostProcess.h>
 #include "../Utility/MessagedException.h"
 #include "../Representations/Object.h"
 #include "TextureLoader.h"

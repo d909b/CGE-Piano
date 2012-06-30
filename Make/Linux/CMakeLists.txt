@@ -23,6 +23,14 @@ SET_PROPERTY(TARGET libjpeg
 		     PROPERTY
              IMPORTED_LOCATION "Lib/Linux/libjpeg.a")
 
+             
+ADD_LIBRARY(assimp STATIC IMPORTED)
+
+SET_PROPERTY(TARGET assimp 
+		     PROPERTY
+             IMPORTED_LOCATION "Lib/Linux/libassimp.a")
+             
+
 ADD_LIBRARY(devIL STATIC IMPORTED)
              
 SET_PROPERTY(TARGET devIL 

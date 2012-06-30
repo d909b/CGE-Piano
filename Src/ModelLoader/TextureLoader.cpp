@@ -1,6 +1,10 @@
 /*
  * TextureLoader.cpp
  *
+ * Image Loading with DevIL to Create Textures was Adapted
+ * from this Tutorial:
+ * 		http://www.lighthouse3d.com/cg-topics/code-samples/importing-3d-models-with-assimp/
+ *
  *  Created on: Jun 25, 2012
  *      Author: steindl
  */
