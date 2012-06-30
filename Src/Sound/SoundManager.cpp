@@ -15,7 +15,7 @@ SoundManager::SoundManager()
 		throw SoundManagerException("Error at init of alut\n");
 	}
 
-	files_[0] = "Resources/Sounds/MetronomeSounds/0.wav";
+	files_[0] = "Resources/Sounds/MetronomeSounds/tick.wav";
 	files_[1] = "Resources/Sounds/PianoSounds/1.wav";
 	files_[2] = "Resources/Sounds/PianoSounds/2.wav";
 	files_[3] = "Resources/Sounds/PianoSounds/3.wav";

@@ -143,7 +143,7 @@ void SceneManager::update(double deltaTime)
 
 	if(isMetronomeOn_)
 	{
-		const float rotationStep = 10.f;
+		const float rotationStep = 1.4f;
 		const float maxSwingerDegrees = 30.f;
 
 		if(rotation > maxSwingerDegrees)
