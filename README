@@ -6,3 +6,8 @@ Setup devIL image library: download package, run ./configure from devIL director
 	copy /usr/local/lib/libIL.a to Lib/MacOS(or Linux) folder, adjust cmake file 
 	
 	To use jpeg files in model loader import this library also: http://www.ijg.org/
+	
+HOW TO PLAY PIANO:
+	you can play piano with the following keys (in correct order): f - t - g - z - h - j - i - k - o - l - p - ö - ä
+	switch metronome on/off: 'm' 
+	

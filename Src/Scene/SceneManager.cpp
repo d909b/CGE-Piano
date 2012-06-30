@@ -29,6 +29,9 @@ void SceneManager::initialize()
 {
 	int x, y;
 
+	//needed for metronome sound loop
+	ismetronome = false;
+
 	glfwWrapper_.getWindowSize(&x, &y);
 
 	x /= 2;
@@ -39,6 +42,12 @@ void SceneManager::initialize()
 
 	appManager_.addUpdateListener(&camera_);
 	inputManager_.addInputListener(&camera_);
+
+	//load the sound manager and play intro music
+	soundManager_.loadSoundBuffers();
+	//play two chords as intro music
+	soundManager_.playSound(14);
+	soundManager_.playSound(15);
 
 	try
 	{
@@ -118,7 +127,66 @@ void SceneManager::mouseMoved(int x, int y)
 
 void SceneManager::keyPressed(int key, int action)
 {
-	;
+	if(action == GLFW_PRESS)
+	{
+		switch(key)
+		{
+		case 'F':
+			soundManager_.playSound(1);
+			break;
+		case 'T':
+			soundManager_.playSound(2);
+			break;
+		case 'G':
+			soundManager_.playSound(3);
+			break;
+		case 'Z':
+			soundManager_.playSound(4);
+			break;
+		case 'H':
+			soundManager_.playSound(5);
+			break;
+		case 'J':
+			soundManager_.playSound(6);
+			break;
+		case 'I':
+			soundManager_.playSound(7);
+			break;
+		case 'K':
+			soundManager_.playSound(8);
+			break;
+		case 'O':
+			soundManager_.playSound(9);
+			break;
+		case 'L':
+			soundManager_.playSound(10);
+			break;
+		case 'P':
+			soundManager_.playSound(11);
+			break;
+		case 214: //'Ö'
+			soundManager_.playSound(12);
+			break;
+		case 196: //'Ä'
+			soundManager_.playSound(13);
+			break;
+		//play metronome
+		case 'M':
+			if(ismetronome)
+			{
+				soundManager_.stopMetronome();
+				ismetronome = false;
+			}
+			else
+			{
+				soundManager_.startMetronome();
+				ismetronome = true;
+			}
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 Camera SceneManager::getCamera() const

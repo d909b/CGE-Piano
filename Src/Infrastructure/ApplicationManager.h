@@ -42,7 +42,6 @@ private:
 	GLFWWrapper glfwWrapper_;
 	SceneManager sceneManager_;
 	RenderManager renderManager_;
-	SoundManager soundManager_;
 	InputManager inputManager_;
 };
 
