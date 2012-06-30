@@ -22,8 +22,8 @@ class GLFWWrapper;
 #define ROOMMODEL "Resources/3dModels/floor.dae"
 #define WALLMODEL "Resources/3dModels/wall.dae"
 #define PIANOMODEL "Resources/3dModels/grand_piano.3DS"
-#define METRONOMMODEL "Resources/3dModels/metronome.3ds"
-#define SWINGER "Resources/3dModels/swingdin3ds.3ds"
+#define METRONOMMODEL "Resources/3dModels/mm.3ds"
+#define SWINGER "Resources/3dModels/swingding.3ds"
 
 class SceneManager : public InputListener, public UpdateListener
 {
