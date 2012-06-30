@@ -10,7 +10,8 @@
 #include <cstdio>
 
 Camera::Camera() :
-	Actor()
+	Actor(),
+	viewingAngles_(160, 0)
 {
 	;
 }
@@ -84,9 +85,6 @@ void Camera::handleRotation(double deltaTime)
 	static const float kRotationSpeed = .007f;
 
 	viewingAngles_ += (lastMousePosition_ - mousePosition_) * kRotationSpeed;
-
-	/**rotate(viewingAngles_.y, glm::vec3(1, 0, 0));
-	rotate(viewingAngles_.x, glm::vec3(0, 1, 0));*/
 
 	if(viewingAngles_.y < -M_PI / 2)
 	{
