@@ -10,13 +10,12 @@
 
 InputManager::InputManager()
 {
-	// TODO Auto-generated constructor stub
-
+	;
 }
 
 InputManager::~InputManager()
 {
-	// TODO Auto-generated destructor stub
+	;
 }
 
 void InputManager::mouseMoved(int x, int y)

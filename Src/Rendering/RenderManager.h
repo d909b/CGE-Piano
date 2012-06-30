@@ -19,7 +19,7 @@ public:
 	virtual ~RenderManager();
 
 	void initialize(int width, int height);
-	void renderObjects(const Camera& camera, const std::list<boost::shared_ptr<Object> > objects);
+	void renderObjects(const Camera& camera, const std::list<boost::shared_ptr<Object> >& objects);
 private:
 	int width_;
 	int height_;

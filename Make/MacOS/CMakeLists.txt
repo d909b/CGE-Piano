@@ -26,6 +26,18 @@ SET_PROPERTY(TARGET assimp
 		     PROPERTY
              IMPORTED_LOCATION "Lib/MacOS/libassimp.a")
              
+ADD_LIBRARY(libjpeg STATIC IMPORTED)
+
+SET_PROPERTY(TARGET libjpeg 
+		     PROPERTY
+             IMPORTED_LOCATION "Lib/MacOS/libjpeg.a")
+
+ADD_LIBRARY(libtiff STATIC IMPORTED)
+
+SET_PROPERTY(TARGET libtiff 
+		     PROPERTY
+             IMPORTED_LOCATION "Lib/MacOS/libtiff.a")
+             
 ADD_LIBRARY(devIL STATIC IMPORTED)
              
 SET_PROPERTY(TARGET devIL 
@@ -38,4 +50,4 @@ SET_PROPERTY(TARGET alut
 		     PROPERTY
              IMPORTED_LOCATION "Lib/MacOS/libalut.a")
 
-TARGET_LINK_LIBRARIES(PianoScene ${OPENGL_LIBRARY} ${COCOA_LIBRARY} ${OPENAL_LIBRARY} alut glfw assimp devIL)
+TARGET_LINK_LIBRARIES(PianoScene ${OPENGL_LIBRARY} ${COCOA_LIBRARY} ${OPENAL_LIBRARY} alut glfw assimp devIL libjpeg libtiff)

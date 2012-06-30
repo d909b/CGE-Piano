@@ -40,6 +40,9 @@ public:
 
 	std::list<boost::shared_ptr<Object> > getObjects() const;
 private:
+	void setupWalls();
+	void setupItems();
+
 	std::list<boost::shared_ptr<Object> > objects_;
 	ModelManager modelManager_;
 
@@ -49,7 +52,10 @@ private:
 
 	Camera camera_;
 	boost::shared_ptr<Object> piano_;
-	boost::shared_ptr<Object> wall_;
+	boost::shared_ptr<Object> wall_front_;
+	boost::shared_ptr<Object> wall_left_;
+	boost::shared_ptr<Object> wall_right_;
+	boost::shared_ptr<Object> wall_back_;
 	boost::shared_ptr<Object> floor_;
 	boost::shared_ptr<Object> swinger_;
 	boost::shared_ptr<Object> metronome_;

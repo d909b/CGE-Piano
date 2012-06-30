@@ -43,7 +43,7 @@ void Camera::initializeMousePosition(int x, int y)
 
 void Camera::handleTranslation(double deltaTime)
 {
-	static const float kMovementSpeed = 5.f;
+	static const float kMovementSpeed = 0.1f;
 
 	glm::vec3 movement(0.f, 0.f, 0.f);
 
@@ -81,7 +81,7 @@ void Camera::handleTranslation(double deltaTime)
 
 void Camera::handleRotation(double deltaTime)
 {
-	static const float kRotationSpeed = .01f;
+	static const float kRotationSpeed = .007f;
 
 	viewingAngles_ += (lastMousePosition_ - mousePosition_) * kRotationSpeed;
 

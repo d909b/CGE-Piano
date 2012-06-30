@@ -14,7 +14,6 @@
 RenderManager::RenderManager()
 {
 	;
-
 }
 
 RenderManager::~RenderManager()
@@ -46,7 +45,7 @@ void RenderManager::initialize(int width, int height)
 	height_ = height;
 }
 
-void RenderManager::renderObjects(const Camera& camera, const std::list<boost::shared_ptr<Object> > objects)
+void RenderManager::renderObjects(const Camera& camera, const std::list<boost::shared_ptr<Object> >& objects)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -82,7 +81,10 @@ void RenderManager::renderObjects(const Camera& camera, const std::list<boost::s
 
 		/** Set up the model-view transformation. */
 		glm::mat4 translation = glm::translate(glm::mat4(1.f), object->getTranslation());
-		glm::mat4 modelViewMatrix = translation * glm::mat4(object->getRotation());
+		glm::mat4 rotation    = glm::mat4(object->getRotation());
+		glm::mat4 scale       = glm::scale(glm::mat4(1.f), glm::vec3(object->getUniformScale()));
+
+		glm::mat4 modelViewMatrix = translation * rotation * scale;
 
 		glMultMatrixf(glm::value_ptr(modelViewMatrix));
 

@@ -8,6 +8,7 @@
 #include "Actor.h"
 
 Actor::Actor() :
+	scale_(1.f),
 	translation_(glm::vec3(0.f, 0.f, 0.f)),
 	rotation_(glm::mat3(1.f, 0.f, 0.f,
 						0.f, 1.f, 0.f,
@@ -41,6 +42,16 @@ void Actor::rotate(float angle, glm::vec3 axis)
 	glm::mat4 res = glm::rotate(glm::mat4(rotation_), angle, axis);
 
 	rotation_ = glm::mat3(res);
+}
+
+void Actor::scaleUniform(float factor)
+{
+	scale_ *= factor;
+}
+
+float Actor::getUniformScale() const
+{
+	return scale_;
 }
 
 void Actor::setRotation(float angle, glm::vec3 axis)
